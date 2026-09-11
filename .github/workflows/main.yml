@@ -36,14 +36,17 @@ jobs:
             --content-type "text/html; charset=utf-8" \
             --acl public-read
         done
-    - name: Invalidate CloudFront cache
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: 'us-east-2'
-      run: |
-        distribution_id=$(aws cloudfront list-distributions \
-          --query "DistributionList.Items[?Aliases.Items && contains(Aliases.Items, 'kausarpatherya.com')].Id | [0]" \
-          --output text)
-        test -n "$distribution_id" && test "$distribution_id" != "None"
-        aws cloudfront create-invalidation --distribution-id "$distribution_id" --paths "/*"
+    # NOTE: CloudFront invalidation is NOT automated here.
+    #
+    # This workflow only writes to S3. Visitors are served by CloudFront, so a
+    # deploy is not visible until the cache is invalidated -- expect stale
+    # content (especially replaced assets such as static/*.pdf) until then.
+    #
+    # Invalidate manually in the AWS console: CloudFront -> the
+    # kausarpatherya.com distribution -> Invalidations -> Create, with /* (or
+    # the specific changed paths).
+    #
+    # To automate it, grant the `Autofront` IAM user cloudfront:ListDistributions
+    # and cloudfront:CreateInvalidation, then restore the step removed here.
+    # Without those permissions the step fails with AccessDenied and reds the
+    # whole deploy.
