@@ -52,7 +52,7 @@ function renderThemes(themes) {
 
 function renderProjectCard(project) {
   const article = createElement("article", `project-card project-card-${project.tier}`);
-  const projectUrl = `/projects/${project.slug}/`;
+  const projectUrl = `/projects/${project.slug}/index.html`;
   const mediaLink = createElement("a", "project-media");
   mediaLink.href = projectUrl;
   mediaLink.setAttribute("aria-label", `View ${project.title} project details`);
