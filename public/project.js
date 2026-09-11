@@ -10,9 +10,13 @@ function projectElement(tagName, className, text) {
 function projectAction(action, projectTitle) {
   const link = projectElement("a", "button button-secondary", action.label);
   link.href = action.url;
-  link.target = "_blank";
-  link.rel = "noopener noreferrer";
-  link.setAttribute("aria-label", `${action.label} for ${projectTitle} (opens in a new tab)`);
+
+  if (action.url.startsWith("http")) {
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.setAttribute("aria-label", `${action.label} for ${projectTitle} (opens in a new tab)`);
+  }
+
   return link;
 }
 

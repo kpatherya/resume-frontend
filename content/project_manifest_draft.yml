@@ -1,0 +1,248 @@
+manifest_version: 0.1
+generated_at: 2026-09-10
+source_scope:
+  repos:
+    - resume-frontend
+    - kausar-blog-jekyll
+    - flash-fusion
+    - polaris
+    - sting-sense
+    - situp
+    - autocalc
+    - quad-ugv-mapping
+    - rl-kuka-arm
+    - TokenSmith
+  note: "Flash-Fusion link inventory was filtered to portfolio-facing files per user instruction."
+
+brand_message: "I build AI systems that turn multi-modal data into intelligent, reliable workflows."
+
+projects:
+  - slug: flash-fusion
+    tier: featured
+    website_include: true
+    verified:
+      title: "Flash-Fusion"
+      one_sentence_description: "Structured natural-language analysis for IoT sensor streams with typed plans, schema validation, and deterministic execution."
+      technical_mechanism: "Closed-vocabulary typed planning pipeline with route, validate, execute, and inspect stages; optional skeleton-cache path."
+      evidence_results:
+        - "Benchmark driver and output layout: run_benchmark.sh"
+        - "Committed benchmark artifacts under results/"
+      runnable_entry_point:
+        - "pytest flashfusion/tests"
+        - "cd chat && pip install -r requirements.txt && vercel dev"
+      assets:
+        images:
+          - "public/favicon.svg"
+          - "chat/public/favicon.svg"
+        videos: []
+      links:
+        repository: "https://github.com/kpath1999/flash-fusion"
+        demo: "https://flash-fusion.vercel.app/"
+        paper: null
+    missing_public_material:
+      - "No public paper URL in root README"
+      - "README and CONTRIBUTING clone URL still use kpath1999"
+    recommendation:
+      - "Update canonical repository link to intended public owner before website refresh"
+
+  - slug: polaris
+    tier: featured
+    website_include: true
+    verified:
+      title: "Cross-Temporal Landmark Matching Pipeline"
+      one_sentence_description: "Vision-language seasonal landmark matching with embedding, semantic, depth, and geometric verification stages."
+      technical_mechanism: "OWL-ViT detection + FastVLM enrichment + depth consistency + keypoint/RANSAC geometric checks with controlled baseline comparisons."
+      evidence_results:
+        - "Example output image in docs/pair_005_comparison.jpg"
+        - "Experiment output CSV files in experiments/"
+      runnable_entry_point:
+        - "python cross_temporal_pipeline.py ..."
+        - "bash experiments/run_all_experiments.sh"
+      assets:
+        images:
+          - "docs/pair_005_comparison.jpg"
+          - "docs/fastvlm-flexible_prompts.png"
+        videos:
+          - "docs/fastvlm-counting.gif"
+          - "docs/fastvlm-handwriting.gif"
+      links:
+        repository: "https://github.com/kpatherya/polaris"
+        demo: null
+        paper: null
+    missing_public_material:
+      - "Main documentation link is a Google Doc edit URL with unknown public visibility"
+      - "No canonical public demo URL in root README"
+    recommendation:
+      - "Replace edit-link with stable public doc page or README-native summary"
+
+  - slug: sting-sense
+    tier: featured
+    website_include: true
+    verified:
+      title: "Bus Tracking with Inertial Sensors"
+      one_sentence_description: "Bus telemetry analytics using GPS and IMU streams for route-level road quality and congestion visibility."
+      technical_mechanism: "Streamlit and Folium analytics over collected route CSVs with hour filters and congestion categorization."
+      evidence_results:
+        - "Route data CSVs under real_data/"
+        - "Static map artifact in index.html"
+      runnable_entry_point:
+        - "streamlit run bus_routes_app.py"
+        - "cd map && npm start"
+      assets:
+        images:
+          - "index.html (rendered map output)"
+        videos: []
+      links:
+        repository: "https://github.com/kpatherya/sting-sense"
+        demo: null
+        paper: null
+    missing_public_material:
+      - "Root README is minimal and does not provide setup/evidence narrative"
+    recommendation:
+      - "Add concise README section with architecture, data flow, and canonical demo"
+
+  - slug: situp
+    tier: featured
+    website_include: true
+    verified:
+      title: "SIT-UP: An Integrated Posture Detection System"
+      one_sentence_description: "MediaPipe-based posture sensing and intervention prototyping for posture-aware daily workflows."
+      technical_mechanism: "Front and side camera pipelines compute posture signals and log metrics for intervention analysis."
+      evidence_results:
+        - "Log files under logs/"
+        - "Questionnaire and study artifacts under questionnaire/"
+      runnable_entry_point:
+        - "python front/front-detector.py"
+        - "python side/side-logging.py"
+      assets:
+        images:
+          - "images/4bkje8amisu61.png"
+          - "images/beepbeep.jfif"
+        videos: []
+      links:
+        repository: "https://github.com/kpatherya/situp"
+        demo: null
+        paper: null
+    missing_public_material:
+      - "No polished reproducible setup section in README"
+    recommendation:
+      - "Add concise run instructions and one representative demo artifact"
+
+  - slug: autocalc
+    tier: supporting
+    website_include: true
+    verified:
+      title: "AutoCaLC: A Causally-Aligned Framework for Automated Curriculum Design"
+      one_sentence_description: "Meta-learning framework that trains a teacher policy to sequence interventions for stronger robot generalization."
+      technical_mechanism: "Teacher Q-table with UCB exploration optimizes intervention transitions using validation learning-progress rewards from student PPO training."
+      evidence_results:
+        - "Q-table evolution GIF and architecture diagram in images/"
+        - "Benchmark summary artifacts in paper_visualizations/"
+      runnable_entry_point:
+        - "python meta_teacher_student_qtable.py --task pushing --meta_episodes 50 ..."
+        - "python baselines.py --train --eval --curriculum_mode none ..."
+      assets:
+        images:
+          - "images/meta-structure.png"
+          - "images/qtable_evolution.gif"
+        videos: []
+      links:
+        repository: "https://github.com/kpatherya/autocalc"
+        demo: null
+        paper: null
+    missing_public_material:
+      - "No linked public paper URL in README"
+
+  - slug: janus-quad-ugv-mapping
+    tier: supporting
+    website_include: true
+    verified:
+      title: "Heterogeneous Robot Mapping Toolbox"
+      one_sentence_description: "ROS 2 integration toolbox for visual-inertial odometry and depth-based occupancy mapping research workflows."
+      technical_mechanism: "Integration and validation layer around VINS, RealSense, TF alignment, point-cloud conversion, and OctoMap."
+      evidence_results:
+        - "Architecture, reproducibility, and provenance docs in docs/"
+      runnable_entry_point:
+        - "source /opt/ros/foxy/setup.bash && ./tools/build_workspace.sh mapping"
+        - "ros2 launch feature_tracker vins_feature_tracker.launch.py"
+      assets:
+        images: []
+        videos: []
+      links:
+        repository: "https://github.com/kpatherya/quad-ugv-mapping"
+        demo: null
+        paper: null
+    missing_public_material:
+      - "Repo explicitly states no archived quantitative results manifest yet"
+    recommendation:
+      - "Use careful wording as integration contribution, not upstream algorithm authorship"
+
+  - slug: rl-kuka-arm
+    tier: supporting
+    website_include: true
+    verified:
+      title: "Mastering Robotic Arm Manipulation with Deep Reinforcement Learning"
+      one_sentence_description: "Comparative RL experimentation for Kuka pick-and-place in PyBullet across A2C, DQN, PPO, and SAC variants."
+      technical_mechanism: "Notebook-centric algorithm implementations and training/evaluation artifacts by method folder."
+      evidence_results:
+        - "Saved policy checkpoints in a2c/, dqn/, ppo/"
+        - "Visual artifacts: kuka_grasp.gif and results/robotic_arm.png"
+      runnable_entry_point:
+        - "Run notebooks under a2c/, dqn/, ppo/, sac/"
+      assets:
+        images:
+          - "kuka_grasp.gif"
+          - "results/robotic_arm.png"
+        videos: []
+      links:
+        repository: "https://github.com/kpatherya/rl-kuka-arm"
+        demo: null
+        paper: null
+    missing_public_material:
+      - "No single script-based reproduction command in README"
+
+  - slug: tokensmith
+    tier: work-in-progress
+    website_include: false
+    verified:
+      title: "TokenSmith"
+      one_sentence_description: "Desktop app for local, source-backed Q&A over course PDFs."
+      technical_mechanism: "Electron front-end with local Python retrieval engine and model/runtime setup scripts."
+      evidence_results:
+        - "Packaging scripts and typed tests declared in package.json"
+        - "Learning harness and Open RAG benchmark notes included"
+      runnable_entry_point:
+        - "npm install"
+        - "npm run setup:python-runtime"
+        - "npm run dev"
+      assets:
+        images:
+          - "src/renderer/src/assets/tokensmith-logo.png"
+          - "build-resources/tokensmith-icon.png"
+        videos: []
+      links:
+        repository: "https://github.com/kpath1999/TokenSmith"
+        demo: null
+        paper: null
+    missing_public_material:
+      - "Public launch positioning intentionally deferred"
+    recommendation:
+      - "Keep hidden from website until explicit release"
+
+site_architecture:
+  resume_frontend:
+    verified:
+      deploy: "GitHub Actions syncs public/ to AWS S3"
+      static_source: "public/index.html and pre-rendered post pages under public/YYYY/..."
+      structured_manifest: "content/projects.yml exists but is currently disconnected from page generation"
+      domain_signal: "public/CNAME=georgiatech.ai"
+  kausar_blog_jekyll:
+    verified:
+      deploy: "GitHub Pages workflow builds Jekyll and deploys _site artifact"
+      source_of_content: "_posts + _layouts + _includes + _config.yml"
+      domain_signal: "CNAME=georgiatech.ai while _config.yml url points to kausarpatherya.com"
+
+constraints:
+  - "Do not expose TokenSmith on public portfolio yet"
+  - "Do not propose flash-fusion-paper as public link"
+  - "Keep Flash-Fusion and Sting-Sense narratives clearly distinct"
