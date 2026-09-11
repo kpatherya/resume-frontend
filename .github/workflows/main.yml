@@ -16,14 +16,20 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: 'us-east-2'   # optional: defaults to us-east-1
         SOURCE_DIR: 'public'
-    - name: Invalidate CloudFront cache
+    - name: Publish project route aliases
       env:
+        AWS_S3_BUCKET: ${{ secrets.AWS_BUCKET_NAME }}
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: 'us-east-2'
       run: |
-        distribution_id=$(aws cloudfront list-distributions \
-          --query "DistributionList.Items[?Aliases.Items && contains(Aliases.Items, 'kausarpatherya.com')].Id | [0]" \
-          --output text)
-        test -n "$distribution_id" && test "$distribution_id" != "None"
-        aws cloudfront create-invalidation --distribution-id "$distribution_id" --paths "/*"
+        for index_file in public/projects/*/index.html; do
+          slug=${index_file#public/projects/}
+          slug=${slug%/index.html}
+          aws s3api put-object \
+            --bucket "$AWS_S3_BUCKET" \
+            --key "projects/$slug/" \
+            --body "$index_file" \
+            --content-type "text/html; charset=utf-8" \
+            --acl public-read
+        done
