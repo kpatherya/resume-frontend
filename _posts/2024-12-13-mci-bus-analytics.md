@@ -36,12 +36,7 @@ The quartiles (Q1, Q2, Q3) of the normalized SDVA dataset were computed. These q
 
 where IQR is the Interquartile Range (Q3 – Q1).
 
-And that’s how the dashboard below came to be.
-
-<div style="text-align: center;">
-    <iframe src="https://kpath1999.github.io/gtbusmap" width="90%" height="600px" style="border:none;"></iframe>
-    <em><br>Fig. 2. <b>Dashboard MVP:</b> Sting-Sense visualization. You can see all the routes mapped out, with the various colors denoting the road conditions.</em>
-</div>
+And that’s how the dashboard MVP came to be. It mapped the routes and used color to distinguish the inferred road conditions.
 
 This is what my professor said:
 
@@ -79,8 +74,6 @@ Now that we have speed data, we can use it to infer traffic congestion levels. L
 Lower numbers mean less congestion (and higher speeds), while higher numbers mean more congestion (and lower speeds). This is how we think about traffic – when there’s heavy congestion, everything slows down to a crawl.
 
 One can gain a nuanced view of traffic conditions, not just identifying whether there is congestion, but how severe it is. However, it’s important to note that this method does not account for planned stops or traffic lights, which could be incorporated in further iterations.
-
-The current version of this dashboard can be found <href="https://gtbusmap.streamlit.app/">here</href>. It allows you to analyze traffic patterns for each route using an hour-based filter. We're aware that the current version takes too long to load, compromising the user experience.
 
 **The road ahead**. Improving the dashboards would be the immediate next step. Incorporating historical data and external traffic information could further enhance the congestion analysis. Furthermore, if we were to link Sting-Sense with class schedules and event calendars, we could make the bus service respond better to campus needs.<sup>11</sup> The game-changer is when we upgrade the system with cellular network connectivity. Currently, we log bus data onto SD cards asynchronously, but with real-time data uploads to the cloud, we would make information readily available to the transportation department and the community at scale. We could make this system even more useful by using machine learning to predict when buses need maintenance. By conducting repairs before mechanical failures occur, the fleet always remains available.<sup>12</sup>
 

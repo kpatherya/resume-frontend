@@ -22,7 +22,7 @@ I followed the minima template. The UI doesn't make you go "wow!!" and that's no
 
 ## Tidbits
 
-I had taken part in the AWS resume challenge in January 2023, and built a visit counter on my website as part of the project (more can be found [here](https://github.com/kpath1999/resume-frontend)). I wasn't able to find a way to directly include my count API within the 'yml' file. I ended up digging through the `_posts` folder (which you're not supposed to touch, since it resets everytime you run 'jekyll clean'). I manually added `Visit count: <span class="visits"></span>` to the `index.html` file to get it to show up on the bottom of the main page.
+I had taken part in the AWS resume challenge in January 2023, and built a visit counter on my website as part of the project (more can be found [here](https://github.com/kpatherya/resume-frontend)). I wasn't able to find a way to directly include my count API within the 'yml' file. I ended up digging through the `_posts` folder (which you're not supposed to touch, since it resets everytime you run 'jekyll clean'). I manually added `Visit count: <span class="visits"></span>` to the `index.html` file to get it to show up on the bottom of the main page.
 
 Another piece I wish I knew was how to add the favicon icon (in my case, a seedling) to my blog tab. I ended up having to go through several 'html' pages and manually included the icon.
 
