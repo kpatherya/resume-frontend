@@ -130,9 +130,10 @@
       "evidence": [
         "Collected route CSV files under real_data/.",
         "A generated interactive map artifact.",
-        "Runnable Streamlit and map application entry points."
+        "Runnable Streamlit and map application entry points.",
+        "The Flash-Fusion v1 preprint extends this sensor-driven transportation analysis into a natural-language IoT workflow."
       ],
-      "limitations": "The root documentation is currently minimal, and a canonical hosted demo URL has not been approved for this release.",
+      "limitations": "The root documentation is currently minimal. The linked preprint reflects the Sting-Sense-centered v1 system; a v2 aligned with the current Flash-Fusion submission is planned.",
       "image": {
         "src": "/images/mci/stinger-run-img.png",
         "alt": "Transit route visualization produced from Sting-Sense bus telemetry"
@@ -147,6 +148,16 @@
           "label": "Live demo",
           "url": "https://sting-sense.vercel.app/",
           "type": "demo"
+        },
+        {
+          "label": "Read project article",
+          "url": "/2024/12/13/mci-bus-analytics/",
+          "type": "article"
+        },
+        {
+          "label": "Read related preprint",
+          "url": "https://arxiv.org/abs/2511.11885",
+          "type": "paper"
         }
       ]
     },
@@ -186,6 +197,11 @@
           "label": "Watch project video",
           "url": "https://www.youtube.com/embed/W3mUOfoK-hg?si=PbCySZheUHO1ZvdU&start=3",
           "type": "video"
+        },
+        {
+          "label": "Read project article",
+          "url": "/2024/12/09/situp-posture-hri/",
+          "type": "article"
         }
       ]
     },
@@ -259,6 +275,45 @@
           "label": "Read architecture docs",
           "url": "https://github.com/kpatherya/quad-ugv-mapping/blob/main/docs/ARCHITECTURE.md",
           "type": "documentation"
+        }
+      ]
+    },
+    {
+      "slug": "tri-finger-robot-arm",
+      "tier": "supporting",
+      "status": "Research project",
+      "title": "Tri-Finger Robot Arm",
+      "eyebrow": "Robot learning",
+      "headline": "Deep reinforcement learning for visual pick-and-place manipulation",
+      "summary": "This project compares A2C, DQN, PPO, and SAC for Kuka pick-and-place manipulation in PyBullet. The agents learn from 48 by 48 RGB observations and are evaluated around sample efficiency, policy stability, and task completion.",
+      "problem": "Vision-based robotic manipulation couples sparse task rewards with high-dimensional observations, making it difficult to learn stable and sample-efficient grasping policies.",
+      "contribution": "A comparative implementation and evaluation of four deep reinforcement learning families on a shared Kuka grasping environment, spanning value-based, actor-critic, and off-policy methods.",
+      "pipeline": [
+        "Observe the simulated Kuka workspace through RGB frames.",
+        "Select among seven discrete end-effector actions.",
+        "Train A2C, DQN, PPO, and SAC policies under a shared grasping objective.",
+        "Compare learning behavior, stability, and successful object lifts."
+      ],
+      "evidence": [
+        "Algorithm implementations and saved policy checkpoints for A2C, DQN, PPO, and SAC.",
+        "Animated Kuka grasping artifact and experiment visualizations.",
+        "A detailed project article covering the literature, methods, experiments, and results."
+      ],
+      "limitations": "The project uses a simulated Kuka environment and a constrained action space. Results do not establish transfer to physical hardware or unconstrained manipulation.",
+      "image": {
+        "src": "/images/robot-arm/kuka-grasp.gif",
+        "alt": "Simulated Kuka robot arm grasping an object in PyBullet"
+      },
+      "actions": [
+        {
+          "label": "View repository",
+          "url": "https://github.com/kpatherya/rl-kuka-arm",
+          "type": "repository"
+        },
+        {
+          "label": "Read project article",
+          "url": "/2024/12/08/robot-arm-advml/",
+          "type": "article"
         }
       ]
     }
