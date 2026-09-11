@@ -3,8 +3,8 @@
   <channel>
     <title>Kausar Patherya</title>
     <description>I like to write, design, code, and share some of the cool projects I&apos;m working on. From AI to CrossFit, I&apos;m all about pushing limits. This blog tries to capture that. I try not to be boring.</description>
-    <link>http://localhost:4000/</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    <link>https://kausarpatherya.com/</link>
+    <atom:link href="https://kausarpatherya.com/feed.xml" rel="self" type="application/rss+xml" />
     <pubDate>Wed, 01 Jan 2025 12:03:21 +0530</pubDate>
     <lastBuildDate>Wed, 01 Jan 2025 12:03:21 +0530</lastBuildDate>
     <generator>Jekyll v4.3.4</generator>
@@ -15,10 +15,7 @@
 
 &lt;p&gt;&lt;strong&gt;The challenge: traffic and maintenance on a busy campus&lt;/strong&gt;. Urban campus transportation systems face numerous challenges, including traffic congestion and road maintenance. The Sting-Sense project addresses these issues by implementing an IoT system on GT’s bus network. This system provides visibility into bus behavior across different times of the day, enabling data-driven decision making.&lt;/p&gt;
 
-&lt;div style=&quot;text-align: center;&quot;&gt;
-    &lt;iframe src=&quot;https://kpath1999.github.io/gtbusmap&quot; width=&quot;80%&quot; height=&quot;600px&quot; style=&quot;border:none;&quot;&gt;&lt;/iframe&gt;
-    &lt;em&gt;&lt;br /&gt;Fig. 1. &lt;b&gt;Dashboard MVP:&lt;/b&gt; Sting-Sense visualization. You can see all the routes mapped out, with the various colors denoting the road conditions.&lt;/em&gt;
-&lt;/div&gt;
+&lt;p&gt;The dashboard MVP mapped the routes and used color to distinguish the inferred road conditions.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Hardware setup: compact yet powerful&lt;/strong&gt;. The Sting-Sense system consists of a custom-built hardware package featuring a microcontroller, a GPS module, and an inertial measurement unit (IMU) sensor. These devices were installed on buses serving four major routes: gold, green, blue, and red. The gold route, in particular, is a vital link between Georgia Tech’s central campus, Tech Square, and the Midtown MARTA Station.&lt;sup&gt;1&lt;/sup&gt;&lt;/p&gt;
 
@@ -116,8 +113,8 @@
 &lt;p&gt;&lt;strong&gt;What’s next?&lt;/strong&gt; As we continue to improve Sting-Sense, Georgia Tech could set new standards for smart campus transportation and become a model for other schools and cities to follow. The project aligns with Georgia Tech’s goal to have 100% clean transportation by 2030. By leveraging IoT technologies, we can optimize route planning, enhance passenger experiences, monitor vehicle health in real-time, improve safety, and enable demand-responsive transit services.&lt;sup&gt;3&lt;/sup&gt;&lt;/p&gt;
 </description>
         <pubDate>Fri, 13 Dec 2024 14:16:19 +0530</pubDate>
-        <link>http://localhost:4000/2024/12/13/mci-bus-analytics/</link>
-        <guid isPermaLink="true">http://localhost:4000/2024/12/13/mci-bus-analytics/</guid>
+        <link>https://kausarpatherya.com/2024/12/13/mci-bus-analytics/</link>
+        <guid isPermaLink="true">https://kausarpatherya.com/2024/12/13/mci-bus-analytics/</guid>
         
         
       </item>
@@ -283,8 +280,8 @@
 &lt;p&gt;&lt;strong&gt;Coda&lt;/strong&gt;. This project was conducted as part of the Human-Robot Interaction class at Georgia Tech. Dr. Sonia Chernova supervised this project, and her TAs, Maithili and Karthik, helped facilitate it.&lt;/p&gt;
 </description>
         <pubDate>Mon, 09 Dec 2024 15:15:16 +0530</pubDate>
-        <link>http://localhost:4000/2024/12/09/situp-posture-hri/</link>
-        <guid isPermaLink="true">http://localhost:4000/2024/12/09/situp-posture-hri/</guid>
+        <link>https://kausarpatherya.com/2024/12/09/situp-posture-hri/</link>
+        <guid isPermaLink="true">https://kausarpatherya.com/2024/12/09/situp-posture-hri/</guid>
         
         
       </item>
@@ -421,8 +418,8 @@ performance and policy stability.&lt;/em&gt;
 &lt;p&gt;&lt;strong&gt;Conclusion&lt;/strong&gt;. In conclusion, this work contributes to the growing body of knowledge on reinforcement learning for robotic manipulation while addressing key challenges such as efficient learning, generalization, and reliable evaluation. These findings not only advance our understanding of existing methods but also offer guidance for future research aimed at creating more efficient, adaptable, and robust RL solutions for real-world robotics.&lt;/p&gt;
 </description>
         <pubDate>Sun, 08 Dec 2024 18:22:08 +0530</pubDate>
-        <link>http://localhost:4000/2024/12/08/robot-arm-advml/</link>
-        <guid isPermaLink="true">http://localhost:4000/2024/12/08/robot-arm-advml/</guid>
+        <link>https://kausarpatherya.com/2024/12/08/robot-arm-advml/</link>
+        <guid isPermaLink="true">https://kausarpatherya.com/2024/12/08/robot-arm-advml/</guid>
         
         
       </item>

@@ -1,0 +1,266 @@
+{
+  "site": {
+    "name": "Kausar Patherya",
+    "headline": "I build AI systems that turn multi-modal data into intelligent, reliable workflows.",
+    "bio": "I am a CS PhD researcher working across multimodal AI, sensor-driven systems, and reliable AI execution. My research turns data from language, vision, IoT sensors, GPS, and inertial measurements into structured workflows that can be inspected, validated, and used in real-world settings.",
+    "primaryAction": {
+      "label": "Explore featured work",
+      "url": "#featured-work"
+    },
+    "secondaryAction": {
+      "label": "Read the Flash-Fusion preprint",
+      "url": "https://arxiv.org/abs/2511.11885"
+    },
+    "profileActions": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/kpatherya"
+      }
+    ]
+  },
+  "researchThemes": [
+    {
+      "title": "Reliable AI Workflows",
+      "description": "Typed plans, validation, deterministic execution, and evidence traces for AI systems that need to be inspected and trusted."
+    },
+    {
+      "title": "Multimodal Perception and Fusion",
+      "description": "Methods and pipelines that combine language, vision, depth, GPS, and inertial sensing to understand changing environments."
+    },
+    {
+      "title": "AI in Real-World Systems",
+      "description": "Research prototypes for IoT analysis, transportation, robotics, and human-centered interventions, grounded in runnable systems and observable artifacts."
+    }
+  ],
+  "projects": [
+    {
+      "slug": "flash-fusion",
+      "tier": "featured",
+      "status": "Active research",
+      "title": "Flash-Fusion",
+      "eyebrow": "Reliable AI systems",
+      "headline": "Structured natural-language analysis for IoT sensor streams",
+      "summary": "Flash-Fusion turns natural-language requests over sensor data into typed plans, validates them against schemas, and executes deterministic operators. Its benchmark artifacts, inspection traces, and reusable query pipeline support paper-oriented research on low-latency, auditable sensor analysis.",
+      "problem": "Natural-language analysis over IoT streams must translate open-ended requests into bounded data operations without losing reproducibility or inspection context.",
+      "contribution": "A reusable route, plan, validate, execute, and inspect pipeline with typed schemas, deterministic pandas operators, and an optional skeleton-cache path.",
+      "pipeline": [
+        "Route the request into a supported analysis path.",
+        "Create a closed-vocabulary typed plan.",
+        "Validate the plan against data and operation schemas.",
+        "Execute deterministic operators and retain an inspection trace."
+      ],
+      "evidence": [
+        "Benchmark driver and output conventions in run_benchmark.sh.",
+        "Committed benchmark artifacts under results/.",
+        "Public preprint and hosted research demo."
+      ],
+      "limitations": "This is active research. The public demo and committed benchmark artifacts reflect the current prototype and may change as evaluation continues.",
+      "image": {
+        "src": "/assets/flash/flash-architecture.png",
+        "alt": "Flash-Fusion architecture showing the sensor query planning and execution workflow"
+      },
+      "actions": [
+        {
+          "label": "View repository",
+          "url": "https://github.com/kpatherya/flash-fusion",
+          "type": "repository"
+        },
+        {
+          "label": "Live demo",
+          "url": "https://flash-fusion.vercel.app/",
+          "type": "demo"
+        },
+        {
+          "label": "Read preprint",
+          "url": "https://arxiv.org/abs/2511.11885",
+          "type": "paper"
+        }
+      ]
+    },
+    {
+      "slug": "polaris",
+      "tier": "featured",
+      "status": "Research prototype",
+      "title": "POLARIS",
+      "eyebrow": "Vision-language systems",
+      "headline": "Matching landmarks across seasonal change",
+      "summary": "POLARIS is a staged vision-language pipeline for cross-temporal landmark matching. It combines object detection, semantic enrichment, depth consistency, and geometric verification, with comparison images and experiment outputs that expose each stage of the workflow.",
+      "problem": "Landmarks can change substantially across seasons, lighting conditions, and viewpoints, making cross-temporal visual correspondence difficult.",
+      "contribution": "A staged pipeline that combines OWL-ViT detection, FastVLM semantic enrichment, depth consistency, and keypoint/RANSAC geometric verification.",
+      "pipeline": [
+        "Detect candidate landmarks in each observation.",
+        "Enrich candidates with vision-language semantics.",
+        "Check depth consistency between candidate regions.",
+        "Apply keypoint and RANSAC geometric verification."
+      ],
+      "evidence": [
+        "Cross-temporal comparison images under docs/.",
+        "Baseline result CSV files under experiments/.",
+        "Runnable pipeline and experiment entry points in the repository."
+      ],
+      "limitations": "The project is a research prototype. No stable public demo or project paper is currently approved for publication on this site.",
+      "image": {
+        "src": "/assets/polaris/pair_005_comparison.jpg",
+        "alt": "POLARIS comparison of landmark observations captured at different times"
+      },
+      "actions": [
+        {
+          "label": "View repository",
+          "url": "https://github.com/kpatherya/polaris",
+          "type": "repository"
+        }
+      ]
+    },
+    {
+      "slug": "sting-sense",
+      "tier": "featured",
+      "status": "Research prototype",
+      "title": "Sting-Sense",
+      "eyebrow": "Transportation sensing",
+      "headline": "Bus telemetry for route and congestion analysis",
+      "summary": "Sting-Sense turns bus GPS and IMU data into route-level views of road quality and congestion. Its Streamlit and Folium workflow connects collected route data, traffic categorization, and interactive maps for transit-focused analysis.",
+      "problem": "Transit telemetry is distributed across location and inertial streams, making route-level road quality and congestion patterns difficult to inspect together.",
+      "contribution": "An application-oriented analytics workflow that combines collected GPS and IMU route data with traffic scoring, time filtering, and interactive map views.",
+      "pipeline": [
+        "Load collected route and sensor CSV data.",
+        "Filter observations by route and time window.",
+        "Categorize traffic and route-level sensing signals.",
+        "Present results through Streamlit and Folium maps."
+      ],
+      "evidence": [
+        "Collected route CSV files under real_data/.",
+        "A generated interactive map artifact.",
+        "Runnable Streamlit and map application entry points."
+      ],
+      "limitations": "The root documentation is currently minimal, and a canonical hosted demo URL has not been approved for this release.",
+      "image": {
+        "src": "/images/mci/stinger-run-img.png",
+        "alt": "Transit route visualization produced from Sting-Sense bus telemetry"
+      },
+      "actions": [
+        {
+          "label": "View repository",
+          "url": "https://github.com/kpatherya/sting-sense",
+          "type": "repository"
+        },
+        {
+          "label": "Live demo",
+          "url": "https://sting-sense.vercel.app/",
+          "type": "demo"
+        }
+      ]
+    },
+    {
+      "slug": "situp",
+      "tier": "featured",
+      "status": "Research prototype",
+      "title": "SIT-UP",
+      "eyebrow": "Human-centered sensing",
+      "headline": "Posture awareness for everyday work",
+      "summary": "SIT-UP uses front- and side-camera posture signals to log seated posture and prototype interventions such as audio, vibration, and desk-adjustment prompts. The project connects MediaPipe-based sensing with questionnaire, logging, and intervention-analysis artifacts.",
+      "problem": "Everyday seated posture changes over time, but workstation interventions need observable posture signals and feedback records before they can be evaluated.",
+      "contribution": "Front- and side-camera posture pipelines that compute posture signals, log measurements, and support prototypes for audio, vibration, and desk-adjustment prompts.",
+      "pipeline": [
+        "Capture front- and side-camera observations.",
+        "Extract MediaPipe posture landmarks and scoring signals.",
+        "Log posture measurements for later analysis.",
+        "Prototype and study several intervention modalities."
+      ],
+      "evidence": [
+        "Posture logs and analysis outputs.",
+        "Questionnaire and study materials.",
+        "Public project video and intervention figures."
+      ],
+      "limitations": "SIT-UP is a human-computer interaction research prototype, not a medical device or a clinical assessment tool.",
+      "image": {
+        "src": "/images/hri/situp-posture.png",
+        "alt": "SIT-UP posture detection view showing seated posture landmarks"
+      },
+      "actions": [
+        {
+          "label": "View repository",
+          "url": "https://github.com/kpatherya/situp",
+          "type": "repository"
+        },
+        {
+          "label": "Watch project video",
+          "url": "https://www.youtube.com/embed/W3mUOfoK-hg?si=PbCySZheUHO1ZvdU&start=3",
+          "type": "video"
+        }
+      ]
+    },
+    {
+      "slug": "autocalc",
+      "tier": "supporting",
+      "status": "Research prototype",
+      "title": "AutoCaLC",
+      "eyebrow": "Robot learning",
+      "headline": "Automated curriculum selection through a teacher-student loop",
+      "summary": "AutoCaLC uses a Q-learning teacher with UCB exploration to sequence interventions for a PPO student, updating the curriculum from validation learning-progress rewards. Architecture, Q-table, and benchmark visualizations make the training process inspectable.",
+      "problem": "Robot training curricula require choices about which interventions to present and when, while the student's learning state changes throughout training.",
+      "contribution": "A teacher-student loop in which a Q-learning teacher uses UCB exploration to select intervention transitions from validation learning-progress rewards produced by PPO student training.",
+      "pipeline": [
+        "Observe the current curriculum and student learning state.",
+        "Select an intervention transition with a Q-table and UCB exploration.",
+        "Train and validate the PPO student.",
+        "Update the teacher from validation learning-progress rewards."
+      ],
+      "evidence": [
+        "Architecture figure and Q-table evolution animation.",
+        "Benchmark and validation visualizations under paper_visualizations/.",
+        "Runnable teacher-student and baseline entry points."
+      ],
+      "limitations": "No public project paper or hosted demo is currently approved for publication on this site.",
+      "image": {
+        "src": "/images/causal/stacking-movement.png",
+        "alt": "Robot manipulation environment used for AutoCaLC curriculum-learning experiments"
+      },
+      "actions": [
+        {
+          "label": "View repository",
+          "url": "https://github.com/kpatherya/autocalc",
+          "type": "repository"
+        }
+      ]
+    },
+    {
+      "slug": "aerial-ground-robot-platform",
+      "tier": "supporting",
+      "status": "Technical contribution",
+      "title": "Aerial-Ground Robot Platform",
+      "eyebrow": "Robotics systems integration",
+      "headline": "Reproducible visual-inertial mapping workflows",
+      "summary": "A systems integration contribution for aerial-ground robotics research, built around ROS 2, VINS, RealSense depth conversion, point clouds, and OctoMap. The project emphasizes validated integration, architecture, provenance, and reproducibility rather than upstream algorithm authorship.",
+      "problem": "Heterogeneous robot mapping workflows must align odometry, depth, transforms, point clouds, and occupancy mapping across several upstream packages and hardware interfaces.",
+      "contribution": "An integration and validation layer around ROS 2, VINS, RealSense, TF alignment, point-cloud conversion, and OctoMap, supported by architecture, provenance, and reproducibility documentation.",
+      "pipeline": [
+        "Build the mapping workspace against the documented ROS 2 environment.",
+        "Run visual-inertial feature tracking and estimation.",
+        "Convert and align depth observations as point clouds.",
+        "Integrate aligned observations into OctoMap workflows."
+      ],
+      "evidence": [
+        "Architecture documentation for the integrated workspace.",
+        "Reproducibility instructions and build tooling.",
+        "Provenance records for upstream packages and interfaces."
+      ],
+      "limitations": "The repository does not yet include an archived quantitative-results manifest. Reproduction requires the documented ROS 2 environment and relevant hardware or recorded data.",
+      "image": {
+        "src": "/images/slam/slam-mapping.png",
+        "alt": "Three-dimensional occupancy map from the aerial-ground robot mapping workflow"
+      },
+      "actions": [
+        {
+          "label": "View repository",
+          "url": "https://github.com/kpatherya/quad-ugv-mapping",
+          "type": "repository"
+        },
+        {
+          "label": "Read architecture docs",
+          "url": "https://github.com/kpatherya/quad-ugv-mapping/blob/main/docs/ARCHITECTURE.md",
+          "type": "documentation"
+        }
+      ]
+    }
+  ]
+}
