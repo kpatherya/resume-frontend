@@ -36,12 +36,12 @@ projects:
           - "chat/public/favicon.svg"
         videos: []
       links:
-        repository: "https://github.com/kpath1999/flash-fusion"
+        repository: "https://github.com/kpatherya/flash-fusion"
         demo: "https://flash-fusion.vercel.app/"
         paper: null
     missing_public_material:
       - "No public paper URL in root README"
-      - "README and CONTRIBUTING clone URL still use kpath1999"
+      - "README and CONTRIBUTING clone URL still use kpatherya"
     recommendation:
       - "Update canonical repository link to intended public owner before website refresh"
 
@@ -221,7 +221,7 @@ projects:
           - "build-resources/tokensmith-icon.png"
         videos: []
       links:
-        repository: "https://github.com/kpath1999/TokenSmith"
+        repository: "https://github.com/kpatherya/TokenSmith"
         demo: null
         paper: null
     missing_public_material:

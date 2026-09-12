@@ -23,10 +23,7 @@ The learning curve here was primarily concentrated within the DNS configuration 
 
 And [here’s the frontend](https://kausarpatherya.com)!
 
-![Landing page](landing-page.png)
-
-
-As can be seen in the above picture, the primary job of the AWS frontend architecture is to display the visit count. The count data is received from the underlying database. I also used this opportunity to host my own blog using Jekyll, a static site generator. More details have been included in [this](https://github.com/kpath1999/kausar-blog-jekyll) repository.
+The primary job of the AWS frontend architecture is to display the visit count. The count data is received from the underlying database. I also used this opportunity to host my own blog using Jekyll, a static site generator. More details have been included in [this](https://github.com/kpatherya/kausar-blog-jekyll) repository.
 
 ## Summary
 
@@ -34,4 +31,4 @@ As can be seen in the above picture, the primary job of the AWS frontend archite
 Despite the occasional struggles, I thoroughly enjoyed the entire learning process. I now have a solid foundational understanding of AWS that wouldn’t have been possible to acquire by just passing certifications. I look forward to working on more projects and deepening my understanding.
 
 
-Thanks for reading! Please find my backend repository linked [here](https://github.com/kpath1999/resume-backend).
+Thanks for reading! Please find my backend repository linked [here](https://github.com/kpatherya/resume-backend).
