@@ -1,8 +1,8 @@
 {
   "site": {
     "name": "Kausar Patherya",
-    "headline": "I build AI systems that turn multi-modal data into intelligent, reliable workflows.",
-    "bio": "I am a CS PhD researcher working across multimodal AI, sensor-driven systems, and reliable AI execution. My research turns data from language, vision, IoT sensors, GPS, and inertial measurements into structured workflows that can be inspected, validated, and used in real-world settings.",
+    "headline": "I build AI agents and workflows that turn multimodal, sensor-rich data into reliable, inspectable systems.",
+    "bio": "I am a CS PhD researcher at Georgia Tech, working at the intersection of AI agents and data systems. My research focuses on building reliable AI agents that turn messy, multimodal data — language, vision, and sensors — into workflows people can actually trust and inspect.",
     "primaryAction": {
       "label": "Explore featured work",
       "url": "#featured-work"
@@ -56,7 +56,7 @@
       ],
       "limitations": "This is active research. The public demo and committed benchmark artifacts reflect the current prototype and may change as evaluation continues.",
       "image": {
-        "src": "/assets/flash/flash-canva-gen.png",
+        "src": "/assets/flash/flash-canva-gen.gif",
         "alt": "Flash-Fusion architecture showing the sensor query planning and execution workflow"
       },
       "actions": [
@@ -100,7 +100,7 @@
       ],
       "limitations": "The project is a research prototype. No stable public demo or project paper is currently approved for publication on this site.",
       "image": {
-        "src": "/assets/polaris/pair_005_comparison.jpg",
+        "src": "/assets/polaris/polaris-overlay.gif",
         "alt": "POLARIS comparison of landmark observations captured at different times"
       },
       "actions": [
