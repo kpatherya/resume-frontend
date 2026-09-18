@@ -11,7 +11,7 @@ function projectAction(action, projectTitle) {
   const link = projectElement("a", "button button-secondary", action.label);
   link.href = action.url;
 
-  if (action.url.startsWith("http")) {
+  if (!action.url.startsWith("#")) {
     link.target = "_blank";
     link.rel = "noopener noreferrer";
     link.setAttribute("aria-label", `${action.label} for ${projectTitle} (opens in a new tab)`);

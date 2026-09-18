@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>POLARIS: Finding the Same Landmark in a Different Season</title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="I like to write, design, code, and share some of the cool projects I'm working on. From AI to CrossFit, I'm all about pushing limits. This blog captures some of that. I try not to be boring, hope you had fun reading!">
+    <link rel="canonical" href="https://kausarpatherya.com/2025/12/05/polaris-cross-season-landmarks/">
+    <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Kausar Patherya posts" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/main.css">
+
+    <!-- Google Analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-3698471-23', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+    <!-- KaTeX script -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+          delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "$", right: "$", display: false}
+          ]
+        });
+      });
+    </script>
+
+</head>
+
+
+    <body>
+
+    <header class="site-header">
+
+  <div class="wrap">
+
+    <div style="float:left; margin-top:10px; margin-right:10px;">
+    <a href="/feed.xml">
+      <img src="/assets/rssicon.svg" width="40">
+    </a>
+    </div>
+
+    <a class="site-title" href="/">Kausar Patherya</a>
+    
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+           viewBox="0 0 18 15" enable-background="new 0 0 18 15" xml:space="preserve">
+          <path fill="#505050" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0
+            h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#505050" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484
+            h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#505050" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0
+            c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+      <div class="trigger">
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrap">
+      <div class="post">
+
+  <header class="post-header">
+    <h1>POLARIS: Finding the Same Landmark in a Different Season</h1>
+    <p class="meta">Dec 5, 2025</p>
+  </header>
+
+  <article class="post-content">
+  <p>Most mapping systems carry a quiet assumption: the world today looks like it did when the map was recorded. Outdoors, that assumption falls apart fast. Trees drop their leaves, snow covers the sidewalk, a facade gets scaffolded, and the sun sits somewhere else in the sky. A robot that drove through a place in October can fail to recognize it in January.<sup>1</sup></p>
+<p>This matters most where GPS is unreliable or too coarse - urban canyons, tunnels, dense tree cover - and the vehicle has to fall back on its camera.<sup>2</sup> Nobody is going to rescan an entire city every season just to keep a map usable. If we want <em>long-term autonomy</em>, the map has to be built once and stay useful all year. That&rsquo;s the idea behind what people call <strong>forever maps</strong>.</p>
+<p>POLARIS is my attempt at a small, tractable slice of that problem: <strong>cross-temporal landmark matching</strong>. Given a query RGB-D frame from one season, can I retrieve the matching frame from a map built in another season, and can I say which parts of the scene are <em>invariant</em> (buildings, fences, poles) versus <em>temporal</em> (snow piles, foliage, puddles)?</p>
+<div style="text-align: center;">
+    <img src="/assets/polaris/pair_005_comparison.png" width="95%" />
+    <em><br>Fig. 1. <b>The problem in one image:</b> The same garden shed in January and April. The pixels barely agree, but the shed, the roofline, and the tree trunks do. POLARIS tries to match on the second set of things.</em>
+</div>
+
+<h3>Why the usual approaches struggle</h3>
+<p>Today&rsquo;s methods sit at two extremes. Traditional geometric methods use local features like SIFT or ORB, which live on texture and edges - exactly what snow erases and what a low winter sun washes out.<sup>3,4</sup> Global appearance-based retrieval goes the other way: it summarizes the whole frame into a single vector, which survives seasonal change better but suffers from perceptual aliasing.<sup>5</sup> Every snowy road looks like every other snowy road.</p>
+<p>Semantic approaches help, but most of them use closed-set detectors trained on a fixed list of categories.<sup>6</sup> Outdoor scenes are full of things those lists never anticipated: a bare hedge, a snow pile, a wet patch of gravel. If you can&rsquo;t name it, you can&rsquo;t down-weight it.</p>
+<p>What was missing, to me, was a way to use all three signals at once - global context, object-level semantics, and 3D geometry - so the system could lock onto the stable skeleton of a scene and ignore the rest.</p>
+<h3>The dataset and the preprocessing</h3>
+<p>I used <strong>ROVER</strong>, specifically the <em>Garden Large</em> sequence, which captures the same outdoor environment in winter and autumn.<sup>7</sup> Foliage loss, snow cover, lighting shifts - it&rsquo;s a hard sequence on purpose, and it comes with aligned depth, which I needed.</p>
+<p>Each season has roughly 2,000 keyframes. Two preprocessing steps run before anything else:</p>
+<p><strong>Keyframe selection.</strong> Consecutive frames in a driving sequence are near-duplicates. I compute HSV histograms $H$ for frames $f_t$ and $f_{t+1}$ and keep a frame only if the histogram intersection $I(H_t, H_{t+1}) < \tau_{hsv}$, with $\tau_{hsv} = 0.9$. This cuts the search space by roughly $100\times$ without throwing away distinct viewpoints.</p>
+<p><strong>Open-vocabulary detection.</strong> I use OWL-ViT to propose regions of interest.<sup>8</sup> Unlike a closed-set detector, it takes text prompts, so I tailored the prompt set to the environment: <em>tree</em>, <em>house</em>, <em>fence</em>, <em>bench</em>, <em>path</em>. Open-vocabulary detection is noisy, so the thresholds are not uniform. High-frequency, ambiguous classes like <em>tree</em> and <em>house</em> get a stricter confidence threshold ($\tau_{\text{high}} = 0.2$) to stop them from flooding the candidate set. Distinct, structurally informative landmarks like <em>fence</em> and <em>bench</em> get a looser one ($\tau_{\text{low}} = 0.1$) to preserve recall. Anything matching <em>snow</em>, <em>mud</em>, or <em>shadow</em> is suppressed outright - those are the things I explicitly do not want to localize against.</p>
+<h3>The pipeline</h3>
+<p>POLARIS is a four-stage, coarse-to-fine pipeline. For a query frame $Q$ and a candidate frame $C$, the total score is a weighted sum:</p>
+<p>$$S_{total}(Q, C) = w_v S_{vis} + w_s S_{sem} + w_d S_{depth} + w_g S_{geom}$$</p>
+<p>with $w_v = 0.3$, $w_s = 0.2$, $w_d = 0.2$, and $w_g = 0.3$ after empirical tuning.</p>
+<div style="text-align: center;">
+    <img src="/assets/polaris/polaris-architecture.png" width="100%" />
+    <em><br>Fig. 2. <b>The POLARIS pipeline:</b> HSV keyframe filtering, OWL-ViT open-vocabulary detection, FastVLM embeddings, depth validation, and ORB + RANSAC geometric verification, producing the top-5 retrieved frames for a query.</em>
+</div>
+
+<p><strong>1. Visual similarity.</strong> FastVLM produces a global embedding $E \in \mathbb{R}^{512}$ per frame, and the score is plain cosine similarity.<sup>9</sup> This is the coarse filter: it tells me which frames are plausibly the same place.</p>
+<p>$$S_{vis} = \frac{E_Q \cdot E_C}{|E_Q| |E_C|}$$</p>
+<p><strong>2. Semantic similarity.</strong> Let $L_Q$ and $L_C$ be the sets of unique detection labels in the two frames. The Jaccard index rewards frames that contain the same kinds of things:</p>
+<p>$$S_{sem} = \frac{|L_Q \cap L_C|}{|L_Q \cup L_C|}$$</p>
+<p><strong>3. Depth consistency.</strong> For every matched region I take the median depth $\tilde{d}$ and score consistency as a ratio, which keeps it scale-invariant:</p>
+<p>$$S_{depth} = \frac{\min(\tilde{d}_Q, \tilde{d}_C)}{\max(\tilde{d}_Q, \tilde{d}_C)}$$</p>
+<p>Matches above $0.7$ get labelled <strong>invariant</strong>. This is the step that actually separates the permanent structure from the seasonal dressing - a snow bank sitting a meter in front of a wall does not agree with that wall in depth.</p>
+<p><strong>4. Geometric verification.</strong> For the survivors, I extract ORB keypoints <em>inside the bounding boxes of invariant objects only</em>, estimate a homography with RANSAC, and use the inlier ratio as the score. Restricting keypoints to invariant regions is the whole point - it is why this stage does better here than running ORB over the full frame.</p>
+<h3>How I evaluated it</h3>
+<p>ROVER does not ship object-level bounding box annotations for my prompt set, so mAP was off the table. Instead I manually inspected the top-5 retrievals for physical overlap with the query scene, and used <strong>average pairwise IoU</strong> as a proxy for match quality. For each detected object $b_{q,i}$ in the query, I find the best-overlapping box in the retrieved frame:</p>
+<p>$$\text{Overlap} = \frac{1}{N} \sum_{i=1}^{N} \max_{j} \text{IoU}(b_{q,i}, b_{r,j})$$</p>
+<p>This asks a narrow question - do objects land in spatially similar places, assuming roughly aligned viewpoints - but it is measurable and it is honest about what it measures.</p>
+<p>I ran queries both directions: autumn as the map with winter queries, then winter as the map with autumn queries.</p>
+<h3>Baselines</h3>
+<p><strong>Baseline A - global visual and semantic retrieval.</strong> FastVLM embeddings plus the Jaccard semantic score, weighted toward appearance: $S_A = 0.7 \cdot S_{vis} + 0.3 \cdot S_{sem}$. I expected it to handle general scene similarity well and to get confused by places that look alike.</p>
+<p><strong>Baseline B - geometric-only matching.</strong> ORB keypoints inside detection boxes, RANSAC homography between every query-candidate detection pair, scored by the confidence of the fit. I expected this to collapse under snow, and it did.</p>
+<h3>Results</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Metric</th>
+<th><strong>Baseline A</strong></th>
+<th><strong>Baseline B</strong></th>
+<th><strong>POLARIS</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mean IoU</td>
+<td>0.2529</td>
+<td>0.2054</td>
+<td>0.2451</td>
+</tr>
+<tr>
+<td>Std IoU</td>
+<td>0.1068</td>
+<td>0.0812</td>
+<td>0.1246</td>
+</tr>
+<tr>
+<td>Min IoU</td>
+<td>0.0100</td>
+<td>0.0887</td>
+<td>0.0100</td>
+</tr>
+<tr>
+<td>Max IoU</td>
+<td>0.4082</td>
+<td>0.3249</td>
+<td><strong>0.4479</strong></td>
+</tr>
+<tr>
+<td>Matches</td>
+<td>6/10</td>
+<td>1/10</td>
+<td><strong>7/10</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>POLARIS retrieves the correct scene 7 times out of 10, against 6 for Baseline A and 1 for Baseline B. The geometric-only baseline falling off a cliff is the least surprising result in the whole project: keypoint matching simply does not survive a season change.</p>
+<p>The more interesting comparison is against Baseline A. Mean IoU is basically a tie (0.2451 vs. 0.2529), but POLARIS has the highest maximum IoU (0.4479). When the depth and geometry checks fire correctly, they give tighter spatial alignment than semantics alone. On queries like <em>autumn_0865</em> and <em>autumn_0000</em>, those extra stages prune candidates that looked right and weren&rsquo;t.</p>
+<h3>What worked, and what didn&rsquo;t</h3>
+<p>Qualitatively, the pipeline is at its best when stable man-made structures are in frame - a shed, a fence line, a wall - even when they&rsquo;re partly under snow. It falls over in scenes that are mostly vegetation, where every tree is a plausible match for every other tree and depth alone can&rsquo;t break the tie.</p>
+<p><strong>Is this a success?</strong> Encouraging, not definitive. I can say confidently that the multi-modal approach beats geometric-only matching across seasons. I cannot say there&rsquo;s statistically significant evidence that POLARIS consistently beats the much simpler Baseline A. The gains are real but modest, and they&rsquo;re conditional: geometric verification only refines matches that the upstream semantic proposals already got roughly right.</p>
+<p>That conditionality is the honest headline. Three limitations follow from it:</p>
+<p><strong>It inherits the detector&rsquo;s recall.</strong> Everything downstream operates inside OWL-ViT&rsquo;s bounding boxes. Winter changes an object&rsquo;s silhouette - a snow-covered bench stops looking like a bench - and when the detector misses it, the geometry stage has nothing to verify. A missed detection is a missed match even when the geometry would have agreed.</p>
+<p><strong>ORB is still ORB.</strong> I restricted it to stable regions, which helps, but the descriptor itself is fragile under dark-trees-against-bright-snow contrast. Baseline B is the proof.</p>
+<p><strong>It is far too slow for a robot.</strong> Running OWL-ViT and FastVLM in sequence over thousands of frames is an offline batch job, not something that fits on lightweight onboard hardware during live navigation.</p>
+<h3>Where I&rsquo;d take it next</h3>
+<p>Two directions look most promising to me.</p>
+<p>The first is replacing ORB with a <strong>learned matcher</strong>. Transformer-based methods like LoFTR and SuperGlue find dense, context-aware correspondences even when local texture changes completely.<sup>10,11</sup> Most of my current failures are cases where the correct landmark was detected and the verification stage couldn&rsquo;t confirm it - exactly the failure mode these methods are built for.</p>
+<p>The second is trading bounding boxes for <strong>pixel-level segmentation</strong> with something like SAM or SegFormer.<sup>12,13</sup> A box around a house in winter contains the house <em>and</em> the snow on its roof <em>and</em> a slice of sky. A mask would let me separate the snow-covered roof from the unchanged facade and hand the geometric verifier much cleaner input. Coarse boxes are quietly injecting noise into every stage after detection.</p>
+<p><strong>Coda.</strong> This project was conducted at Georgia Tech in Fall 2025, with Samuel Ibidapo and Jacob Blevins. The code is on <a href="https://github.com/kpatherya/polaris">GitHub</a>.</p>
+</article>
+
+  <!-- mathjax -->
+  
+  
+  <!-- disqus comments -->
+ 
+  
+</div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrap">
+
+    <!-- <h2 class="footer-heading">Kausar Patherya</h2> -->
+
+    <div class="footer-col-1 column">
+      <ul>
+        <li>Kausar Patherya</li>
+        <!-- <li><a href="mailto:"></a></li> -->
+      </ul>
+    </div>
+
+    <div class="footer-col-2 column">
+      <ul>
+        <li>
+          <a href="https://github.com/kpatherya">
+            <span class="icon github">
+              <svg version="1.1" class="github-icon-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                 viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
+                <path fill-rule="evenodd" clip-rule="evenodd" fill="#C2C2C2" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761
+                c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32
+                c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472
+                c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037
+                C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65
+                c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261
+                c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082
+                c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129
+                c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+              </svg>
+            </span>
+            <span class="username">kpatherya</span>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a href="https://linkedin.com/in/kpatherya">
+            <span class="icon linkedin">
+              <svg style="filter: grayscale(50%);" class="linkedin-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#0A66C2">
+                <rect width="24" height="24" fill="#D3D3D3"/>
+                <path d="M20.45,20.45H17.1v-5.21c0-1.25-0.02-2.85-1.74-2.85c-1.74,0-2.01,1.36-2.01,2.76v5.3h-3.35V9.5h3.22v1.47h0.04 c0.45-0.85,1.54-1.74,3.18-1.74c3.4,0,4.03,2.24,4.03,5.15L20.45,20.45L20.45,20.45z M5.95,8.03c-1.08,0-1.95-0.88-1.95-1.95 c0-1.08,0.87-1.95,1.95-1.95c1.07,0,1.95,0.87,1.95,1.95C7.9,7.15,7.02,8.03,5.95,8.03z M7.63,20.45H4.27V9.5h3.36V20.45z" fill="#FFFFFF"/>
+              </svg>
+            </span>
+            <span class="username">kpatherya</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://www.youtube.com/@gatechai">
+          <span class="icon youtube">
+          <svg version="1.1" class="youtube-icon-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 16 16" width="16" height="16" enable-background="new 0 0 16 16" xml:space="preserve">
+          <path fill="#C2C2C2" d="M15.8,4.8c-0.2-1.3-0.8-2.2-2.2-2.4C11.4,2,8,2,8,2S4.6,2,2.4,2.4C1,2.6,0.3,3.5,0.2,4.8C0,6.1,0,8,0,8 s0,1.9,0.2,3.2c0.2,1.3,0.8,2.2,2.2,2.4C4.6,14,8,14,8,14s3.4,0,5.6-0.4c1.4-0.3,2-1.1,2.2-2.4C16,9.9,16,8,16,8S16,6.1,15.8,4.8z M6,11V5l5,3L6,11z"/>
+          </svg>
+          </span>
+          <span class="username">gatechai</span>
+          </a>
+          </li>
+          <li>
+          <a href="https://creators.spotify.com/pod/show/gatechai">
+          <span class="icon spotify">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#C2C2C2" class="bi bi-spotify" viewBox="0 0 16 16"> <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.669 11.538a.5.5 0 0 1-.686.165c-1.879-1.147-4.243-1.407-7.028-.77a.499.499 0 0 1-.222-.973c3.048-.696 5.662-.397 7.77.892a.5.5 0 0 1 .166.686m.979-2.178a.624.624 0 0 1-.858.205c-2.15-1.321-5.428-1.704-7.972-.932a.625.625 0 0 1-.362-1.194c2.905-.881 6.517-.454 8.986 1.063a.624.624 0 0 1 .206.858m.084-2.268C10.154 5.56 5.9 5.419 3.438 6.166a.748.748 0 1 1-.434-1.432c2.825-.857 7.523-.692 10.492 1.07a.747.747 0 1 1-.764 1.288"/> </svg>
+          <!-- <svg version="1.1" class="spotify-icon-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 16 16" width="16" height="16" enable-background="new 0 0 16 16" xml:space="preserve">
+          <path fill="#C2C2C2" d="M8,0C3.6,0,0,3.6,0,8s3.6,8,8,8s8-3.6,8-8S12.4,0,8,0z M11.7,11.5c-0.1,0.2-0.3,0.3-0.5,0.3 c-0.1,0-0.2,0-0.3-0.1C9.6,11.1,8.2,10.8,6.8,11c-1.3,0.1-2.5,0.5-3.7,1c-0.2,0.1-0.5,0-0.7-0.2c-0.1-0.2,0-0.5,0.2-0.7 c1.3-0.6,2.7-1,4.2-1.1c1.6-0.2,3.2,0.2,4.6,0.9C11.6,11.1,11.7,11.3,11.7,11.5z M12.7,9.3c-0.1,0.2-0.4,0.4-0.6,0.4 c-0.1,0-0.2,0-0.3-0.1c-1.6-0.9-3.4-1.3-5.2-1.2c-1.6,0.1-3.2,0.6-4.6,1.4c-0.3,0.1-0.6,0-0.8-0.2c-0.1-0.3,0-0.6,0.2-0.8 c1.6-0.9,3.3-1.4,5.1-1.5c2-0.1,4,0.3,5.8,1.3C12.7,8.7,12.8,9.1,12.7,9.3z M13.7,6.9c-0.2,0.3-0.5,0.4-0.8,0.4 c-0.1,0-0.2,0-0.3-0.1C10.6,6,8.4,5.6,6.2,5.7C4.3,5.9,2.4,6.4,0.7,7.3c-0.3,0.2-0.7,0-0.9-0.3C-0.3,6.7-0.2,6.3,0.2,6.1 c2-1,4.1-1.6,6.2-1.8c2.5-0.2,4.9,0.3,7.1,1.5C13.8,6,13.9,6.5,13.7,6.9z"/>
+          </svg> -->
+          </span>
+          <span class="username">gatechai</span>
+          </a>
+          </li>
+      </ul>
+    </div>
+
+    <div class="footer-col-3 column">
+      <p class="text">I like to write, design, code, and share some of the cool projects I'm working on. From AI to CrossFit, I'm all about pushing limits. This blog captures some of that. I try not to be boring, hope you had fun reading!</p>
+    </div>
+
+  </div>
+
+</footer>
+
+    </body>
+</html>

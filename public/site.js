@@ -11,7 +11,7 @@ function createAction(action, projectTitle, className = "action-link") {
   const link = createElement("a", className, action.label);
   link.href = action.url;
 
-  if (action.url.startsWith("http")) {
+  if (!action.url.startsWith("#")) {
     link.target = "_blank";
     link.rel = "noopener noreferrer";
     link.setAttribute("aria-label", `${action.label} for ${projectTitle} (opens in a new tab)`);
@@ -55,7 +55,9 @@ function renderProjectCard(project) {
   const projectUrl = `/projects/${project.slug}/index.html`;
   const mediaLink = createElement("a", "project-media");
   mediaLink.href = projectUrl;
-  mediaLink.setAttribute("aria-label", `View ${project.title} project details`);
+  mediaLink.target = "_blank";
+  mediaLink.rel = "noopener noreferrer";
+  mediaLink.setAttribute("aria-label", `View ${project.title} project details (opens in a new tab)`);
 
   const image = createElement("img");
   image.src = project.image.src;
@@ -73,6 +75,8 @@ function renderProjectCard(project) {
   const heading = createElement("h3");
   const titleLink = createElement("a", "project-title-link", project.title);
   titleLink.href = projectUrl;
+  titleLink.target = "_blank";
+  titleLink.rel = "noopener noreferrer";
   heading.append(titleLink);
 
   body.append(

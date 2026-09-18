@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AutoCaLC: Teaching the Teacher</title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="I like to write, design, code, and share some of the cool projects I'm working on. From AI to CrossFit, I'm all about pushing limits. This blog captures some of that. I try not to be boring, hope you had fun reading!">
+    <link rel="canonical" href="https://kausarpatherya.com/2025/12/15/autocalc-curriculum-learning/">
+    <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Kausar Patherya posts" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/main.css">
+
+    <!-- Google Analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-3698471-23', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+    <!-- KaTeX script -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+          delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "$", right: "$", display: false}
+          ]
+        });
+      });
+    </script>
+
+</head>
+
+
+    <body>
+
+    <header class="site-header">
+
+  <div class="wrap">
+
+    <div style="float:left; margin-top:10px; margin-right:10px;">
+    <a href="/feed.xml">
+      <img src="/assets/rssicon.svg" width="40">
+    </a>
+    </div>
+
+    <a class="site-title" href="/">Kausar Patherya</a>
+    
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+           viewBox="0 0 18 15" enable-background="new 0 0 18 15" xml:space="preserve">
+          <path fill="#505050" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0
+            h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#505050" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484
+            h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#505050" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0
+            c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+      <div class="trigger">
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrap">
+      <div class="post">
+
+  <header class="post-header">
+    <h1>AutoCaLC: Teaching the Teacher</h1>
+    <p class="meta">Dec 15, 2025</p>
+  </header>
+
+  <article class="post-content">
+  <p>Everyone in robot learning has run into the adaptation gap. A policy trained in simulation does beautifully in simulation, then meets a slightly heavier block or a slightly slicker floor and falls apart.<sup>1</sup> The usual fix is curriculum learning: start the agent on easy versions of the task and gradually make life harder.<sup>2</sup></p>
+<p>That works, but almost every implementation I read used a fixed schedule or a hand-written heuristic. Which raises the obvious question: how would you ever know if the agent spent too long on a task it had already solved, or moved off a hard one too early? The curriculum is a policy too. Why not learn it?</p>
+<p>That&rsquo;s AutoCaLC - <strong>Auto</strong>mated <strong>Ca</strong>usal <strong>L</strong>earning <strong>C</strong>urriculum. A teacher agent learns to pick environmental modifications for a student agent, and gets rewarded by how well the student generalizes.</p>
+<h3>The playground</h3>
+<p>All of this runs in <strong>CausalWorld</strong>, a physics simulator built around a TriFinger robot.<sup>3</sup> The reason I care about CausalWorld specifically is that it exposes <em>interventions</em> - you can change the mass of a block, the friction of the floor, the color of an object, mid-experiment. These are concrete instantiations of Pearl&rsquo;s $do()$ operator.<sup>4</sup> If an agent trained only on light blocks collapses when the mass goes up, that&rsquo;s evidence its policy was riding a spurious correlation rather than any understanding of the physics.</p>
+<p>I used seven interventions throughout:</p>
+<ul>
+<li><strong>Goal</strong>: moves the target, forcing the agent to reach different parts of the workspace.</li>
+<li><strong>Mass</strong>: alters the mass of the tool. Heavier means more force to start and stop.</li>
+<li><strong>Friction</strong>: changes the floor, making objects easier or harder to push and slide.</li>
+<li><strong>Visual</strong>: changes appearance only. A test of whether the agent is learning from state features that actually matter.</li>
+<li><strong>Position</strong>: moves the block&rsquo;s starting position.</li>
+<li><strong>Orientation</strong>: rotates the block without moving it, so the agent has to approach from new angles.</li>
+<li><strong>Random</strong>: a catch-all combining several of the above (excluding joints, which is a trickier space).</li>
+</ul>
+<div style="text-align: center;">
+    <img src="/assets/autocalc/causalworld-task-configs.png" width="100%" />
+    <em><br>Fig. 1. <b>Interventions in CausalWorld:</b> The agent is rewarded in proportion to the intersection between each block and the goal configuration. From T1 to T4, block size is changed directly through the simulator's built-in interventions.</em>
+</div>
+
+<h3>First question: does order matter?</h3>
+<p>Before building anything clever, I wanted to know whether the <em>sequence</em> of interventions changes the outcome at all. Seven interventions means 7! = 5,040 possible orderings. Brute force is already impractical, and it gets absurd quickly - ten interventions would be 3,628,800 sequences.</p>
+<p>So I ran four heuristics against each other, all starting from the same pretrained PPO checkpoint, all with the same total training budget.<sup>5</sup> Each one tests the remaining interventions in a separate environment (so the evaluation doesn&rsquo;t contaminate the policy), picks one, trains on it, and repeats until it runs out.</p>
+<ul>
+<li><strong>None</strong>: no interventions at all. Keep training on the base environment.</li>
+<li><strong>Random</strong>: uniform sampling from the remaining pool. The control.</li>
+<li><strong>Greedy</strong>: pick whichever remaining intervention yields the highest average episodic reward right now.</li>
+<li><strong>Causal-Mismatch</strong>: pick by balancing novelty against learnability.<sup>6</sup></li>
+</ul>
+<p>Causal-Mismatch is the interesting one. For each intervention, I collect trajectories with the current policy, train small ensembles for transition dynamics, reward dynamics, and $\beta$-VAEs over states and actions, then score disagreement as the sum of ensemble standard deviations. That disagreement is an implicit signal of <em>epistemic uncertainty</em> - where the agent&rsquo;s internal model of the world is misaligned with reality - without having to discover a full structural causal model, which is intractable at this scale.<sup>7</sup> The final score combines it with reward:</p>
+<p>$$\text{Unified} = \alpha \cdot CM_{norm} + (1-\alpha) \cdot Reward_{norm}$$</p>
+<p>with $\alpha = 0.5$, weighting novelty and learnability equally.</p>
+<p>The three curricula picked genuinely different orders, which told me the selection rules were doing something:</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Random</th>
+<th>Greedy</th>
+<th>Causal-Mismatch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>random</td>
+<td>position</td>
+<td>position</td>
+</tr>
+<tr>
+<td>2</td>
+<td>visual</td>
+<td>goal</td>
+<td>friction</td>
+</tr>
+<tr>
+<td>3</td>
+<td>position</td>
+<td>friction</td>
+<td>visual</td>
+</tr>
+<tr>
+<td>4</td>
+<td>goal</td>
+<td>visual</td>
+<td>mass</td>
+</tr>
+<tr>
+<td>5</td>
+<td>friction</td>
+<td>mass</td>
+<td>random</td>
+</tr>
+<tr>
+<td>6</td>
+<td>angle</td>
+<td>random</td>
+<td>goal</td>
+</tr>
+<tr>
+<td>7</td>
+<td>mass</td>
+<td>angle</td>
+<td>angle</td>
+</tr>
+</tbody>
+</table></div>
+<h3>What the baselines showed</h3>
+<p>Training <em>None</em> with no interventions produced the highest mean episode reward and hit the 500-step episode cap almost immediately. It had mastered the default environment. It also had a 0% success rate at final evaluation. It was optimizing reward, not the task.</p>
+<p>All three curricula took a reward hit the moment the first intervention landed, and then diverged. Causal-Mismatch ended with the highest policy standard deviation and the steepest entropy reduction of the four - it explored broadly across regimes while committing decisively within each one.</p>
+<div style="text-align: center;">
+    <img src="/assets/autocalc/policy_std.png" width="85%" />
+    <em><br>Fig. 2. <b>Policy standard deviation across all four heuristics:</b> Green dashed lines mark curriculum stage boundaries. All baselines start from the same pretrained checkpoint. Causal-Mismatch climbs fastest, which is what you would expect from the curriculum that exposes the policy to the most diverse experience.</em>
+</div>
+
+<p>But then the generalization sweep across CausalWorld&rsquo;s standardized protocols (P0-P11) delivered the result I did not want:</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Baseline</th>
+<th>Integrated success</th>
+<th>vs. None</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Random</td>
+<td>0.2334</td>
+<td>+41.3%</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Causal-Mismatch</td>
+<td>0.1987</td>
+<td>+20.3%</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Greedy</td>
+<td>0.1884</td>
+<td>+14.0%</td>
+</tr>
+<tr>
+<td>4</td>
+<td>None</td>
+<td>0.1652</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Random won.</strong> A principled, ensemble-based novelty measure lost to picking interventions out of a hat. Causal-Mismatch was the only method to reach a 100% success rate at final evaluation, so it was learning something real about <em>completing the task</em> rather than maximizing score - but it didn&rsquo;t generalize best.</p>
+<p>Two honest caveats. The random baseline was run with a single seed; a proper comparison needs mean and variance over many orderings, and a different seed might well have produced a different winner. And Causal-Mismatch is sensitive to $\alpha$, which I fixed at 0.5 with no tuning.</p>
+<p>Still, the takeaway pointed somewhere useful: if random ordering can beat a hand-designed heuristic, there are certainly good sequences among those 5,040 that no fixed rule will find. What if the selection rule could learn?</p>
+<h3>The AutoCaLC framework</h3>
+<p>The student is a PPO agent with a two-layer MLP, 64 units each, solving the CausalWorld pushing task.<sup>8</sup> The teacher is a DQN that picks which of the seven interventions to apply next.<sup>9</sup></p>
+<div style="text-align: center;">
+    <img src="/assets/autocalc/meta-structure.png" width="80%" />
+    <em><br>Fig. 3. <b>The teacher-student loop:</b> The teacher observes the student's learning state, emits a meta-action that reconfigures the physics engine, and receives a meta-reward from the student's performance in a fixed validation set.</em>
+</div>
+
+<p>The teacher lives in a meta-level MDP:</p>
+<p><strong>Meta-state.</strong> For each of the seven interventions I compute two numbers: the causal-mismatch score (how inconsistent the student&rsquo;s dynamics ensembles are under that intervention) and the average reward the student gets when it briefly runs its current policy there. Both are normalized independently across the seven, then concatenated into a fixed 14-dimensional vector. That&rsquo;s the teacher&rsquo;s entire view of the student.</p>
+<p><strong>Meta-action.</strong> One of seven interventions.</p>
+<p><strong>Meta-reward.</strong> The student&rsquo;s average reward over ten fixed validation environments. Critically, these environments are <em>not</em> affected by the teacher&rsquo;s choice, so the feedback signal isn&rsquo;t gamed by picking an easy intervention.</p>
+<p>Training runs in meta-episodes: the teacher observes, picks an intervention, the student trains for 5,000 timesteps in the modified environment, the student is evaluated on the validation set, and the tuple $(S_{meta}, A_{meta}, R_{meta}, S'_{meta})$ goes into the teacher&rsquo;s replay buffer. Fifty meta-episodes, so 250,000 student timesteps and fifty curriculum decisions.</p>
+<p>The expensive part is that each teacher decision costs a full 5,000-step student training run. You cannot afford a sloppy exploration schedule at that price, so I used three phases: pure exploration ($\epsilon = 1.0$) for the first 5 meta-episodes, decay from 0.8 to 0.2 over the next 30, then a slow decay to 0.05 over the final 15. A 50K-transition replay buffer absorbs the non-stationarity of a student whose policy is changing underneath the teacher, and the target network uses a soft update with $\tau = 0.005$. Every run starts from the same pretrained PPO checkpoint, trained 5,000 steps on the base environment.</p>
+<p>I went in with four hypotheses:</p>
+<ul>
+<li><strong>H1</strong>: AutoCaLC hits perfect validation success more often than myopic approaches like Greedy.</li>
+<li><strong>H2</strong>: AutoCaLC accrues <em>lower</em> reward in early meta-episodes, because the teacher starts at 100% exploration and makes bad calls before it knows anything.</li>
+<li><strong>H3</strong>: AutoCaLC is more resilient across the seven interventions.</li>
+<li><strong>H4</strong>: Most importantly, AutoCaLC does better across the benchmark protocols than the specialized baselines.</li>
+</ul>
+<h3>What actually happened</h3>
+<p>H2 held, which is the least impressive kind of correct. The teacher does start badly, exactly as a fully exploring DQN should.</p>
+<p>H4 did not hold. Across the P0-P11 benchmark sweep, AutoCaLC scored near zero on most protocols, well below the heuristics and below the pretrained checkpoint it started from. The learned curriculum was worse than picking at random.</p>
+<div style="text-align: center;">
+    <img src="/assets/autocalc/benchmark_radar_plot.png" width="80%" />
+    <em><br>Fig. 4. <b>Benchmark performance across protocols P0-P11:</b> Each axis is a different environmental configuration. No method dominates, and the spikiness is the real story - these policies are winning individual protocols rather than generalizing across them.</em>
+</div>
+
+<p>I do not think this makes the idea wrong, but I think it makes the <em>budget</em> wrong, and it&rsquo;s worth being specific about why:</p>
+<p><strong>Fifty decisions is nothing.</strong> A DQN needs thousands of transitions to learn a useful Q-function. The teacher got fifty, and burned the first five on pure exploration. It never had the data to distinguish a good intervention from a lucky one.</p>
+<p><strong>The meta-reward is noisy.</strong> Average validation reward after 5,000 student timesteps is a high-variance measurement. Two identical teacher actions can produce visibly different meta-rewards, so the teacher is fitting a Q-function to mostly noise.</p>
+<p><strong>The student is a moving target.</strong> Standard DQN assumes a stationary environment. Here the &ldquo;environment&rdquo; includes a student policy that changes every meta-episode. The replay buffer stores transitions describing a student that no longer exists.</p>
+<p><strong>The benchmark rewards specialists.</strong> Look again at the radar plot: every method has spikes. Greedy owns P0 and P4, Causal-Mismatch owns P8, Random owns P7. Nothing covers the whole space. An integrated score across protocols may be rewarding lucky specialization more than genuine robustness, which makes it a shaky target for the teacher to optimize toward.</p>
+<h3>Where this goes</h3>
+<p>The cleanest fix for the sample-efficiency problem is to stop making the teacher learn from scratch. Pretrain a set of teachers, each one specialized to a particular intervention, then put a meta-controller above them - a <strong>dean</strong> - whose only job is to pick which teacher is most appropriate for the student&rsquo;s current state. The student learns through guided policy distillation, with PPO loss plus a KL term between student and selected teacher.</p>
+<div style="text-align: center;">
+    <img src="/assets/autocalc/metarl-merged-diagram.png" width="100%" />
+    <em><br>Fig. 5. <b>Left:</b> the current teacher-student loop. <b>Right:</b> the proposed dean architecture, where a meta-controller selects among pretrained teachers and the student learns by distillation. The dean's action space is small and its reward is the student's validation improvement.</em>
+</div>
+
+<p>The dean&rsquo;s action space is small, its state is the teachers&rsquo; collective output, and its reward is the student&rsquo;s improvement on the validation set. That&rsquo;s a far more tractable learning problem than what I asked the teacher to solve here.</p>
+<p>Two other things I&rsquo;d change. Run the random baseline across many seeds so the comparison is against a distribution rather than one draw. And replace the integrated protocol score with something that explicitly penalizes spiky, specialist performance - if the goal is robustness, the metric should say so.</p>
+<p><strong>Coda.</strong> This project was conducted at Georgia Tech in Spring-Fall 2025, with Batuhan Altunda, Yu Wang, Idris Wibowo, and Dr. Matthew Gombolay. The full implementation is on <a href="https://github.com/kpath1999/causal-core-su25">GitHub</a>.</p>
+</article>
+
+  <!-- mathjax -->
+  
+  
+  <!-- disqus comments -->
+ 
+  
+</div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrap">
+
+    <!-- <h2 class="footer-heading">Kausar Patherya</h2> -->
+
+    <div class="footer-col-1 column">
+      <ul>
+        <li>Kausar Patherya</li>
+        <!-- <li><a href="mailto:"></a></li> -->
+      </ul>
+    </div>
+
+    <div class="footer-col-2 column">
+      <ul>
+        <li>
+          <a href="https://github.com/kpatherya">
+            <span class="icon github">
+              <svg version="1.1" class="github-icon-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                 viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
+                <path fill-rule="evenodd" clip-rule="evenodd" fill="#C2C2C2" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761
+                c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32
+                c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472
+                c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037
+                C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65
+                c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261
+                c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082
+                c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129
+                c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+              </svg>
+            </span>
+            <span class="username">kpatherya</span>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a href="https://linkedin.com/in/kpatherya">
+            <span class="icon linkedin">
+              <svg style="filter: grayscale(50%);" class="linkedin-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#0A66C2">
+                <rect width="24" height="24" fill="#D3D3D3"/>
+                <path d="M20.45,20.45H17.1v-5.21c0-1.25-0.02-2.85-1.74-2.85c-1.74,0-2.01,1.36-2.01,2.76v5.3h-3.35V9.5h3.22v1.47h0.04 c0.45-0.85,1.54-1.74,3.18-1.74c3.4,0,4.03,2.24,4.03,5.15L20.45,20.45L20.45,20.45z M5.95,8.03c-1.08,0-1.95-0.88-1.95-1.95 c0-1.08,0.87-1.95,1.95-1.95c1.07,0,1.95,0.87,1.95,1.95C7.9,7.15,7.02,8.03,5.95,8.03z M7.63,20.45H4.27V9.5h3.36V20.45z" fill="#FFFFFF"/>
+              </svg>
+            </span>
+            <span class="username">kpatherya</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://www.youtube.com/@gatechai">
+          <span class="icon youtube">
+          <svg version="1.1" class="youtube-icon-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 16 16" width="16" height="16" enable-background="new 0 0 16 16" xml:space="preserve">
+          <path fill="#C2C2C2" d="M15.8,4.8c-0.2-1.3-0.8-2.2-2.2-2.4C11.4,2,8,2,8,2S4.6,2,2.4,2.4C1,2.6,0.3,3.5,0.2,4.8C0,6.1,0,8,0,8 s0,1.9,0.2,3.2c0.2,1.3,0.8,2.2,2.2,2.4C4.6,14,8,14,8,14s3.4,0,5.6-0.4c1.4-0.3,2-1.1,2.2-2.4C16,9.9,16,8,16,8S16,6.1,15.8,4.8z M6,11V5l5,3L6,11z"/>
+          </svg>
+          </span>
+          <span class="username">gatechai</span>
+          </a>
+          </li>
+          <li>
+          <a href="https://creators.spotify.com/pod/show/gatechai">
+          <span class="icon spotify">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#C2C2C2" class="bi bi-spotify" viewBox="0 0 16 16"> <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.669 11.538a.5.5 0 0 1-.686.165c-1.879-1.147-4.243-1.407-7.028-.77a.499.499 0 0 1-.222-.973c3.048-.696 5.662-.397 7.77.892a.5.5 0 0 1 .166.686m.979-2.178a.624.624 0 0 1-.858.205c-2.15-1.321-5.428-1.704-7.972-.932a.625.625 0 0 1-.362-1.194c2.905-.881 6.517-.454 8.986 1.063a.624.624 0 0 1 .206.858m.084-2.268C10.154 5.56 5.9 5.419 3.438 6.166a.748.748 0 1 1-.434-1.432c2.825-.857 7.523-.692 10.492 1.07a.747.747 0 1 1-.764 1.288"/> </svg>
+          <!-- <svg version="1.1" class="spotify-icon-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 16 16" width="16" height="16" enable-background="new 0 0 16 16" xml:space="preserve">
+          <path fill="#C2C2C2" d="M8,0C3.6,0,0,3.6,0,8s3.6,8,8,8s8-3.6,8-8S12.4,0,8,0z M11.7,11.5c-0.1,0.2-0.3,0.3-0.5,0.3 c-0.1,0-0.2,0-0.3-0.1C9.6,11.1,8.2,10.8,6.8,11c-1.3,0.1-2.5,0.5-3.7,1c-0.2,0.1-0.5,0-0.7-0.2c-0.1-0.2,0-0.5,0.2-0.7 c1.3-0.6,2.7-1,4.2-1.1c1.6-0.2,3.2,0.2,4.6,0.9C11.6,11.1,11.7,11.3,11.7,11.5z M12.7,9.3c-0.1,0.2-0.4,0.4-0.6,0.4 c-0.1,0-0.2,0-0.3-0.1c-1.6-0.9-3.4-1.3-5.2-1.2c-1.6,0.1-3.2,0.6-4.6,1.4c-0.3,0.1-0.6,0-0.8-0.2c-0.1-0.3,0-0.6,0.2-0.8 c1.6-0.9,3.3-1.4,5.1-1.5c2-0.1,4,0.3,5.8,1.3C12.7,8.7,12.8,9.1,12.7,9.3z M13.7,6.9c-0.2,0.3-0.5,0.4-0.8,0.4 c-0.1,0-0.2,0-0.3-0.1C10.6,6,8.4,5.6,6.2,5.7C4.3,5.9,2.4,6.4,0.7,7.3c-0.3,0.2-0.7,0-0.9-0.3C-0.3,6.7-0.2,6.3,0.2,6.1 c2-1,4.1-1.6,6.2-1.8c2.5-0.2,4.9,0.3,7.1,1.5C13.8,6,13.9,6.5,13.7,6.9z"/>
+          </svg> -->
+          </span>
+          <span class="username">gatechai</span>
+          </a>
+          </li>
+      </ul>
+    </div>
+
+    <div class="footer-col-3 column">
+      <p class="text">I like to write, design, code, and share some of the cool projects I'm working on. From AI to CrossFit, I'm all about pushing limits. This blog captures some of that. I try not to be boring, hope you had fun reading!</p>
+    </div>
+
+  </div>
+
+</footer>
+
+    </body>
+</html>

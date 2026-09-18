@@ -108,6 +108,11 @@
           "label": "View repository",
           "url": "https://github.com/kpatherya/polaris",
           "type": "repository"
+        },
+        {
+          "label": "Read project article",
+          "url": "/2025/12/05/polaris-cross-season-landmarks/index.html",
+          "type": "article"
         }
       ]
     },
@@ -151,13 +156,8 @@
         },
         {
           "label": "Read project article",
-          "url": "/2024/12/13/mci-bus-analytics/",
+          "url": "/2024/12/13/mci-bus-analytics/index.html",
           "type": "article"
-        },
-        {
-          "label": "Read related preprint",
-          "url": "https://arxiv.org/abs/2511.11885",
-          "type": "paper"
         }
       ]
     },
@@ -200,7 +200,7 @@
         },
         {
           "label": "Read project article",
-          "url": "/2024/12/09/situp-posture-hri/",
+          "url": "/2024/12/09/situp-posture-hri/index.html",
           "type": "article"
         }
       ]
@@ -236,6 +236,11 @@
           "label": "View repository",
           "url": "https://github.com/kpatherya/autocalc",
           "type": "repository"
+        },
+        {
+          "label": "Read project article",
+          "url": "/2025/12/15/autocalc-curriculum-learning/index.html",
+          "type": "article"
         }
       ]
     },
@@ -312,7 +317,7 @@
         },
         {
           "label": "Read project article",
-          "url": "/2024/12/08/robot-arm-advml/",
+          "url": "/2024/12/08/robot-arm-advml/index.html",
           "type": "article"
         }
       ]

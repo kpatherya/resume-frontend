@@ -1,0 +1,27 @@
+[1] Wenshuai Zhao, Jorge Peña Queralta, and Tomi Westerlund. Sim-to-real transfer in deep reinforcement
+learning for robotics: a survey. IEEE Symposium Series on Computational Intelligence (SSCI), 2020.
+
+[2] Yoshua Bengio, Jérôme Louradour, Ronan Collobert, and Jason Weston. Curriculum learning.
+Proceedings of the 26th Annual International Conference on Machine Learning (ICML), 2009.
+
+[3] Ossama Ahmed, Frederik Träuble, Anirudh Goyal, Alexander Neitz, Yoshua Bengio, Bernhard
+Schölkopf, Manuel Wüthrich, and Stefan Bauer. CausalWorld: A robotic manipulation benchmark for
+causal structure and transfer learning. arXiv preprint arXiv:2010.04296, 2020.
+
+[4] Judea Pearl. On the interpretation of do(x). Journal of Causal Inference, 2019.
+
+[5] John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov. Proximal Policy
+Optimization Algorithms. arXiv preprint arXiv:1707.06347, 2017.
+
+[6] Geonwoo Cho, Jaegyun Im, Doyoon Kim, and Sundong Kim. Causal-Paced Deep Reinforcement
+Learning. arXiv preprint arXiv:2507.02910, 2025.
+
+[7] Yan Zeng, Ruichu Cai, Fuchun Sun, Libo Huang, and Zhifeng Hao. A survey on causal reinforcement
+learning. IEEE Transactions on Neural Networks and Learning Systems, 2024.
+
+[8] John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov. Proximal Policy
+Optimization Algorithms. arXiv preprint arXiv:1707.06347, 2017.
+
+[9] Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Alex Graves, Ioannis Antonoglou, Daan
+Wierstra, and Martin Riedmiller. Playing Atari with Deep Reinforcement Learning. arXiv preprint
+arXiv:1312.5602, 2013.
