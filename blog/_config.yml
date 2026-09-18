@@ -1,0 +1,21 @@
+# Site settings
+title: Kausar Patherya
+email: 
+description: "I like to write, design, code, and share some of the cool projects I'm working on. From AI to CrossFit, I'm all about pushing limits. This blog captures some of that. I try not to be boring, hope you had fun reading!"
+baseurl: ""
+url: "https://kausarpatherya.com"
+github_username: kpatherya
+linkedin_username:  kpatherya
+youtube_username: gatechai
+spotify_username: gatechai
+
+# Build settings
+markdown: kramdown
+permalink: pretty
+
+highlighter: rouge
+kramdown:
+  input: GFM
+  auto_ids: true
+  syntax_highlighter: rouge
+  math_engine: mathjax

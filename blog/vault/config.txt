@@ -1,0 +1,9 @@
+I like to write, design, code, and share some of the cool projects I'm working on. I try not to be boring.
+
+I do a lot of things. My main thing right now is grad school.
+
+We're officially in the intelligence age and I don't want to miss out on the fun. So, I enrolled in Georgia Tech in August 2024. There's nothing more exciting than the work that's happening within machine learning and robotics.
+
+This journey is new to me and there's a lot I don't understand. There's a clear gap between academic research and public understanding. As an outsider looking in, I realized that something had to be done. In December 2024, I founded the <a href="georgiatech.ai">Georgia Tech AI Podcast</a>. Our mission is to make cutting-edge AI research accessible to everyone. We delve into the minds of the top researchers at Tech who are shaping the future of AI. Each episode is a journey of discovery, unraveling complex concepts and revealing the human stories behind the code.
+
+This is my way of bridging the divide.
