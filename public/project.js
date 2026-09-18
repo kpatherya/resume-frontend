@@ -34,6 +34,13 @@ function renderProject(project) {
   document.querySelector("#project-title").textContent = project.title;
   document.querySelector("#project-headline").textContent = project.headline;
   document.querySelector("#project-summary").textContent = project.summary;
+  const collaborators = document.querySelector("#project-collaborators");
+  if (project.collaborators?.length) {
+    collaborators.textContent = `\u{1F44F} Special thanks to my collaborators: ${project.collaborators.join(", ")}`;
+    collaborators.hidden = false;
+  } else {
+    collaborators.remove();
+  }
   document.querySelector("#project-problem").textContent = project.problem;
   document.querySelector("#project-contribution").textContent = project.contribution;
   document.querySelector("#project-limitations").textContent = project.limitations;

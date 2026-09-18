@@ -4,8 +4,8 @@
     "headline": "I build AI agents you can trust with messy sensor data \u2014 from the device to the cloud.",
     "bio": "I'm a CS PhD student at Georgia Tech's LLAMAS Lab, working on how people can ask plain-language questions of data that was never meant to be queried that way. My current system, Flash-Fusion, compiles those questions into typed, validated plans and runs them over live IoT streams \u2014 95% faster and 98% cheaper than handing raw telemetry to an LLM, deployed on a university bus fleet. Before that I wrote the embedded firmware that made the same fleet's data small enough to ship over LTE, which is roughly how I think about this work: the hard problems live between the sensor and the model, not inside either one. Most of it ends up on GitHub \u2014 if something's useful, open an issue.",
     "primaryAction": {
-      "label": "Explore featured work",
-      "url": "#featured-work"
+      "label": "CV (Sep. 2026)",
+      "url": "https://kausarpatherya.com/static/Kausar-Patherya-Resume.pdf"
     },
     "secondaryAction": {
       "label": "Read the Flash-Fusion preprint",
@@ -41,6 +41,10 @@
       "eyebrow": "Reliable AI systems",
       "headline": "Structured natural-language analysis for IoT sensor streams",
       "summary": "Flash-Fusion turns natural-language requests over sensor data into typed plans, validates them against schemas, and executes deterministic operators. Its benchmark artifacts, inspection traces, and reusable query pipeline support paper-oriented research on low-latency, auditable sensor analysis.",
+      "collaborators": [
+        "Ashutosh Dhekne",
+        "Francisco Romero"
+      ],
       "problem": "Natural-language analysis over IoT streams must translate open-ended requests into bounded data operations without losing reproducibility or inspection context.",
       "contribution": "A reusable route, plan, validate, execute, and inspect pipeline with typed schemas, deterministic pandas operators, and an optional skeleton-cache path.",
       "pipeline": [
@@ -85,6 +89,11 @@
       "eyebrow": "Vision-language systems",
       "headline": "Matching landmarks across seasonal change",
       "summary": "POLARIS is a staged vision-language pipeline for cross-temporal landmark matching. It combines object detection, semantic enrichment, depth consistency, and geometric verification, with comparison images and experiment outputs that expose each stage of the workflow.",
+      "collaborators": [
+        "Samuel Ibidapo",
+        "Jacob Blevins",
+        "Zsolt Kira"
+      ],
       "problem": "Landmarks can change substantially across seasons, lighting conditions, and viewpoints, making cross-temporal visual correspondence difficult.",
       "contribution": "A staged pipeline that combines OWL-ViT detection, FastVLM semantic enrichment, depth consistency, and keypoint/RANSAC geometric verification.",
       "pipeline": [
@@ -124,6 +133,12 @@
       "eyebrow": "Transportation sensing",
       "headline": "Bus telemetry for route and congestion analysis",
       "summary": "Sting-Sense turns bus GPS and IMU data into route-level views of road quality and congestion. Its Streamlit and Folium workflow connects collected route data, traffic categorization, and interactive maps for transit-focused analysis.",
+      "collaborators": [
+        "Yu Wang",
+        "Drumil Deliwala",
+        "Ashutosh Dhekne",
+        "Francisco Romero"
+      ],
       "problem": "Transit telemetry is distributed across location and inertial streams, making route-level road quality and congestion patterns difficult to inspect together.",
       "contribution": "An application-oriented analytics workflow that combines collected GPS and IMU route data with traffic scoring, time filtering, and interactive map views.",
       "pipeline": [
@@ -169,6 +184,13 @@
       "eyebrow": "Human-centered sensing",
       "headline": "Posture awareness for everyday work",
       "summary": "SIT-UP uses front- and side-camera posture signals to log seated posture and prototype interventions such as audio, vibration, and desk-adjustment prompts. The project connects MediaPipe-based sensing with questionnaire, logging, and intervention-analysis artifacts.",
+      "collaborators": [
+        "Rishabh Goel",
+        "Anwesha Gorantla",
+        "Justin Wit",
+        "Junghyun Bae",
+        "Alexander Adams"
+      ],
       "problem": "Everyday seated posture changes over time, but workstation interventions need observable posture signals and feedback records before they can be evaluated.",
       "contribution": "Front- and side-camera posture pipelines that compute posture signals, log measurements, and support prototypes for audio, vibration, and desk-adjustment prompts.",
       "pipeline": [
@@ -213,6 +235,12 @@
       "eyebrow": "Robot learning",
       "headline": "Automated curriculum selection through a teacher-student loop",
       "summary": "AutoCaLC uses a Q-learning teacher with UCB exploration to sequence interventions for a PPO student, updating the curriculum from validation learning-progress rewards. Architecture, Q-table, and benchmark visualizations make the training process inspectable.",
+      "collaborators": [
+        "Batuhan Altundas",
+        "Yu Wang",
+        "Idris Wibowo",
+        "Matthew Gombolay"
+      ],
       "problem": "Robot training curricula require choices about which interventions to present and when, while the student's learning state changes throughout training.",
       "contribution": "A teacher-student loop in which a Q-learning teacher uses UCB exploration to select intervention transitions from validation learning-progress rewards produced by PPO student training.",
       "pipeline": [
@@ -252,6 +280,14 @@
       "eyebrow": "Robotics systems integration",
       "headline": "Reproducible visual-inertial mapping workflows",
       "summary": "A systems integration contribution for aerial-ground robotics research, built around ROS 2, VINS, RealSense depth conversion, point clouds, and OctoMap. The project emphasizes validated integration, architecture, provenance, and reproducibility rather than upstream algorithm authorship.",
+      "collaborators": [
+        "Sandilya Sai Garimella",
+        "Ethan Kim",
+        "Zeina Rmaile",
+        "Lucas Trujillo",
+        "Xinyi Wei",
+        "Lu Gan"
+      ],
       "problem": "Heterogeneous robot mapping workflows must align odometry, depth, transforms, point clouds, and occupancy mapping across several upstream packages and hardware interfaces.",
       "contribution": "An integration and validation layer around ROS 2, VINS, RealSense, TF alignment, point-cloud conversion, and OctoMap, supported by architecture, provenance, and reproducibility documentation.",
       "pipeline": [
@@ -291,6 +327,12 @@
       "eyebrow": "Robot learning",
       "headline": "Deep reinforcement learning for visual pick-and-place manipulation",
       "summary": "This project compares A2C, DQN, PPO, and SAC for Kuka pick-and-place manipulation in PyBullet. The agents learn from 48 by 48 RGB observations and are evaluated around sample efficiency, policy stability, and task completion.",
+      "collaborators": [
+        "Arjun Bansal",
+        "Ruchi Patel",
+        "Ayushi Rajppot",
+        "Bo Dai"
+      ],
       "problem": "Vision-based robotic manipulation couples sparse task rewards with high-dimensional observations, making it difficult to learn stable and sample-efficient grasping policies.",
       "contribution": "A comparative implementation and evaluation of four deep reinforcement learning families on a shared Kuka grasping environment, spanning value-based, actor-critic, and off-policy methods.",
       "pipeline": [

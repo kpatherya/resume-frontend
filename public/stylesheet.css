@@ -101,6 +101,7 @@ h3 { margin-bottom: 4px; font-size: 16px; font-weight: 700; line-height: 1.3; le
 .project-page-meta { margin-bottom: 10px; justify-content: flex-start; }
 .project-detail-headline { margin-bottom: 12px; font-size: 16px; font-weight: 700; }
 .project-page-summary { color: var(--muted); font-size: 14px; }
+.project-collaborators { margin-bottom: 14px; padding: 7px 9px; border-left: 3px solid var(--link); background: var(--soft-blue); color: var(--ink); font-size: 13px; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 8px 16px; }
 .button { color: var(--link); font-size: 13px; }
 .button + .button::before { margin-right: 8px; color: var(--muted); content: "/"; }
