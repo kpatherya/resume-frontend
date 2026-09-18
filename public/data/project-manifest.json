@@ -1,8 +1,8 @@
 {
   "site": {
     "name": "Kausar Patherya",
-    "headline": "I build AI agents and workflows that turn multimodal, sensor-rich data into reliable, inspectable systems.",
-    "bio": "I am a CS PhD researcher at Georgia Tech, working at the intersection of AI agents and data systems. My research focuses on building reliable AI agents that turn messy, multimodal data — language, vision, and sensors — into workflows people can actually trust and inspect.",
+    "headline": "I build AI agents you can trust with messy sensor data \u2014 from the device to the cloud.",
+    "bio": "I'm a CS PhD student at Georgia Tech's LLAMAS Lab, working on how people can ask plain-language questions of data that was never meant to be queried that way. My current system, Flash-Fusion, compiles those questions into typed, validated plans and runs them over live IoT streams \u2014 95% faster and 98% cheaper than handing raw telemetry to an LLM, deployed on a university bus fleet. Before that I wrote the embedded firmware that made the same fleet's data small enough to ship over LTE, which is roughly how I think about this work: the hard problems live between the sensor and the model, not inside either one. Most of it ends up on GitHub \u2014 if something's useful, open an issue.",
     "primaryAction": {
       "label": "Explore featured work",
       "url": "#featured-work"
@@ -21,15 +21,15 @@
   "researchThemes": [
     {
       "title": "Reliable AI Workflows",
-      "description": "Typed plans, validation, deterministic execution, and evidence traces for AI systems that need to be inspected and trusted."
+      "description": "Typed plans, schema validation, and per-query evidence traces, so you can audit what an agent actually did instead of taking its word for it."
     },
     {
       "title": "Multimodal Perception and Fusion",
-      "description": "Methods and pipelines that combine language, vision, depth, GPS, and inertial sensing to understand changing environments."
+      "description": "Combining language, vision, depth, GPS, and inertial signals to read environments that change faster than any single sensor can follow."
     },
     {
       "title": "AI in Real-World Systems",
-      "description": "Research prototypes for IoT analysis, transportation, robotics, and human-centered interventions, grounded in runnable systems and observable artifacts."
+      "description": "Prototypes that leave the bench \u2014 bus fleets, robots, workstations \u2014 where success means a system that keeps running, not a better number in a table."
     }
   ],
   "projects": [
