@@ -5,6 +5,19 @@ The [AWS Resume Challenge](https://cloudresumechallenge.dev/docs/the-challenge/a
 
 ![Complete architecture diagram](full-architecture.png)
 
+## Repository layout
+
+- `public/` — everything served on the live site. The `Upload Website` action syncs this directory (and only this directory) to S3 on every push to `main`. CloudFront invalidation is **not** automated; see `.github/workflows/main.yml`.
+- `blog/` — Jekyll blog source, imported from `kausar-blog-jekyll` with `git subtree` so it is versioned here rather than in a separate clone. See [blog/README.md](blog/README.md) for the post-publishing workflow. Nothing in `blog/` is deployed directly; posts are rendered into `public/`.
+- `content/` — project inventory and audit notes. `content/project_manifest_draft.yml` is a working document, not the live manifest; the live one is `public/data/project-manifest.json`.
+
+To pull later blog changes from the standalone repo, or push changes back to it:
+
+```bash
+git subtree pull --prefix=blog <blog-repo-url> <branch>
+git subtree push --prefix=blog <blog-repo-url> <branch>
+```
+
 ## Building the frontend infrastructure
 
 In this README, I will go over how I created the frontend for the AWS Resume Challenge.
