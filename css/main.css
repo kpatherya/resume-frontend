@@ -225,6 +225,36 @@ a:visited { color: #205caa; }
 .post-content ul,
 .post-content ol { padding-left: 20px; }
 
+.post-content .table-scroll {
+  overflow-x: auto;
+  margin: 30px 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+.post-content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  margin: 0;
+}
+
+.post-content table th,
+.post-content table td {
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.post-content table th {
+  font-weight: 700;
+  border-bottom: 2px solid #333;
+  white-space: nowrap;
+}
+
+.post-content table tbody tr:last-child td { border-bottom: 2px solid #333; }
+
+.post-content table tbody tr:hover { background-color: #f7f7f7; }
+
 .post pre,
 .post code {
   border: 1px solid #d5d5e9;
@@ -416,6 +446,13 @@ a:visited { color: #205caa; }
   .post-content blockquote { padding-left: 10px; }
   .post-content ul,
   .post-content ol { padding-left: 10px; }
+
+  .post-content table {
+    font-size: 14px;
+  }
+
+  .post-content table th,
+  .post-content table td { padding: 6px 8px; }
 
   .site-footer .column {
     float: none;
