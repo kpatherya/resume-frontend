@@ -1,0 +1,47 @@
+{
+  "slug": "aerial-ground-robot-platform",
+  "tier": "supporting",
+  "status": "Technical contribution",
+  "title": "Aerial-Ground Robot Platform",
+  "eyebrow": "Robotics systems integration",
+  "headline": "Reproducible visual-inertial mapping workflows",
+  "summary": "A systems integration contribution for aerial-ground robotics research, built around ROS 2, VINS, RealSense depth conversion, point clouds, and OctoMap. The project emphasizes validated integration, architecture, provenance, and reproducibility rather than upstream algorithm authorship.",
+  "collaborators": [
+    "Sandilya Sai Garimella",
+    "Ethan Kim",
+    "Zeina Rmaile",
+    "Lucas Trujillo",
+    "Xinyi Wei",
+    "Lu Gan"
+  ],
+  "problem": "Heterogeneous robot mapping workflows must align odometry, depth, transforms, point clouds, and occupancy mapping across several upstream packages and hardware interfaces.",
+  "contribution": "An integration and validation layer around ROS 2, VINS, RealSense, TF alignment, point-cloud conversion, and OctoMap, supported by architecture, provenance, and reproducibility documentation.",
+  "pipeline": [
+    "Build the mapping workspace against the documented ROS 2 environment.",
+    "Run visual-inertial feature tracking and estimation.",
+    "Convert and align depth observations as point clouds.",
+    "Integrate aligned observations into OctoMap workflows."
+  ],
+  "evidence": [
+    "Architecture documentation for the integrated workspace.",
+    "Reproducibility instructions and build tooling.",
+    "Provenance records for upstream packages and interfaces."
+  ],
+  "limitations": "The repository does not yet include an archived quantitative-results manifest. Reproduction requires the documented ROS 2 environment and relevant hardware or recorded data.",
+  "image": {
+    "src": "/images/slam/slam-mapping.png",
+    "alt": "Three-dimensional occupancy map from the aerial-ground robot mapping workflow"
+  },
+  "actions": [
+    {
+      "label": "View repository",
+      "url": "https://github.com/kpatherya/quad-ugv-mapping",
+      "type": "repository"
+    },
+    {
+      "label": "Read architecture docs",
+      "url": "https://github.com/kpatherya/quad-ugv-mapping/blob/main/docs/ARCHITECTURE.md",
+      "type": "documentation"
+    }
+  ]
+}

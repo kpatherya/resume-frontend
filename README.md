@@ -9,7 +9,27 @@ The [AWS Resume Challenge](https://cloudresumechallenge.dev/docs/the-challenge/a
 
 - `public/` — everything served on the live site. The `Upload Website` action syncs this directory (and only this directory) to S3 on every push to `main`. CloudFront invalidation is **not** automated; see `.github/workflows/main.yml`.
 - `blog/` — Jekyll blog source, imported from `kausar-blog-jekyll` with `git subtree` so it is versioned here rather than in a separate clone. See [blog/README.md](blog/README.md) for the post-publishing workflow. Nothing in `blog/` is deployed directly; posts are rendered into `public/`.
-- `content/` — project inventory and audit notes. `content/project_manifest_draft.yml` is a working document, not the live manifest; the live one is `public/data/project-manifest.json`.
+- `content/` — source of truth for the site copy. `content/site.json` holds the site chrome, research themes, and project display order; `content/projects/<slug>.json` holds one project write-up each. `content/project_manifest_draft.yml` remains a working audit document.
+- `tools/build_manifest.py` — assembles those sources into `public/data/project-manifest.json`. That file is **generated, not committed** (it is gitignored) and is rebuilt by CI before every deploy.
+
+## Revising a project write-up
+
+Each project lives in its own file, so the seven write-ups can be revised on
+independent branches and merged into `main` in any order without conflicts.
+
+```bash
+./tools/revise.sh list             # every project and whether a branch exists
+./tools/revise.sh start polaris    # creates/switches to kausar/polaris off origin/main
+# ...rewrite content/projects/polaris.json...
+./tools/revise.sh preview          # builds the manifest, serves http://localhost:8000
+./tools/revise.sh ship polaris     # validates, pushes, opens a PR into main
+./tools/revise.sh sync             # rebase onto the latest main if it has moved
+```
+
+`.github/workflows/validate.yml` runs on every `kausar/**` push and every PR into
+`main`. It validates the manifest sources and fails a revision branch that edits
+another project's file. Merging the PR triggers `Upload Website`, which rebuilds
+the manifest and syncs `public/` to S3.
 
 To pull later blog changes from the standalone repo, or push changes back to it:
 

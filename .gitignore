@@ -1,2 +1,6 @@
 docs/
 .DS_Store
+
+# Built by tools/build_manifest.py from content/site.json + content/projects/*.json,
+# and regenerated at deploy time so revision branches never collide on it.
+public/data/project-manifest.json

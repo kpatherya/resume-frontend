@@ -1,0 +1,44 @@
+{
+  "slug": "polaris",
+  "tier": "featured",
+  "status": "Research prototype",
+  "title": "POLARIS",
+  "eyebrow": "Vision-language systems",
+  "headline": "Matching landmarks across seasonal change",
+  "summary": "POLARIS is a staged vision-language pipeline for cross-temporal landmark matching. It combines object detection, semantic enrichment, depth consistency, and geometric verification, with comparison images and experiment outputs that expose each stage of the workflow.",
+  "collaborators": [
+    "Samuel Ibidapo",
+    "Jacob Blevins",
+    "Zsolt Kira"
+  ],
+  "problem": "Landmarks can change substantially across seasons, lighting conditions, and viewpoints, making cross-temporal visual correspondence difficult.",
+  "contribution": "A staged pipeline that combines OWL-ViT detection, FastVLM semantic enrichment, depth consistency, and keypoint/RANSAC geometric verification.",
+  "pipeline": [
+    "Detect candidate landmarks in each observation.",
+    "Enrich candidates with vision-language semantics.",
+    "Check depth consistency between candidate regions.",
+    "Apply keypoint and RANSAC geometric verification."
+  ],
+  "evidence": [
+    "Cross-temporal comparison images under docs/.",
+    "Baseline result CSV files under experiments/.",
+    "Runnable pipeline and experiment entry points in the repository."
+  ],
+  "limitations": "The project is a research prototype. No stable public demo or project paper is currently approved for publication on this site.",
+  "image": {
+    "src": "/assets/polaris/polaris-overlay.gif",
+    "alt": "POLARIS comparison of landmark observations captured at different times"
+  },
+  "actions": [
+    {
+      "label": "View repository",
+      "url": "https://github.com/kpatherya/polaris",
+      "type": "repository"
+    },
+    {
+      "label": "Read project article",
+      "url": "/2025/12/05/polaris-cross-season-landmarks/index.html",
+      "type": "article"
+    }
+  ]
+}

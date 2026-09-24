@@ -1,0 +1,51 @@
+{
+  "slug": "situp",
+  "tier": "featured",
+  "status": "Research prototype",
+  "title": "SIT-UP",
+  "eyebrow": "Human-centered sensing",
+  "headline": "Posture awareness for everyday work",
+  "summary": "SIT-UP uses front- and side-camera posture signals to log seated posture and prototype interventions such as audio, vibration, and desk-adjustment prompts. The project connects MediaPipe-based sensing with questionnaire, logging, and intervention-analysis artifacts.",
+  "collaborators": [
+    "Rishabh Goel",
+    "Anwesha Gorantla",
+    "Justin Wit",
+    "Junghyun Bae",
+    "Alexander Adams"
+  ],
+  "problem": "Everyday seated posture changes over time, but workstation interventions need observable posture signals and feedback records before they can be evaluated.",
+  "contribution": "Front- and side-camera posture pipelines that compute posture signals, log measurements, and support prototypes for audio, vibration, and desk-adjustment prompts.",
+  "pipeline": [
+    "Capture front- and side-camera observations.",
+    "Extract MediaPipe posture landmarks and scoring signals.",
+    "Log posture measurements for later analysis.",
+    "Prototype and study several intervention modalities."
+  ],
+  "evidence": [
+    "Posture logs and analysis outputs.",
+    "Questionnaire and study materials.",
+    "Public project video and intervention figures."
+  ],
+  "limitations": "SIT-UP is a human-computer interaction research prototype, not a medical device or a clinical assessment tool.",
+  "image": {
+    "src": "/images/hri/situp-canva-gen.png",
+    "alt": "SIT-UP posture detection view showing seated posture landmarks"
+  },
+  "actions": [
+    {
+      "label": "View repository",
+      "url": "https://github.com/kpatherya/situp",
+      "type": "repository"
+    },
+    {
+      "label": "Watch project video",
+      "url": "https://www.youtube.com/embed/W3mUOfoK-hg?si=PbCySZheUHO1ZvdU&start=3",
+      "type": "video"
+    },
+    {
+      "label": "Read project article",
+      "url": "/2024/12/09/situp-posture-hri/index.html",
+      "type": "article"
+    }
+  ]
+}

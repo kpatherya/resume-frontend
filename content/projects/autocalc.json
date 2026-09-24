@@ -1,0 +1,45 @@
+{
+  "slug": "autocalc",
+  "tier": "supporting",
+  "status": "Research prototype",
+  "title": "AutoCaLC",
+  "eyebrow": "Robot learning",
+  "headline": "Automated curriculum selection through a teacher-student loop",
+  "summary": "AutoCaLC uses a Q-learning teacher with UCB exploration to sequence interventions for a PPO student, updating the curriculum from validation learning-progress rewards. Architecture, Q-table, and benchmark visualizations make the training process inspectable.",
+  "collaborators": [
+    "Batuhan Altundas",
+    "Yu Wang",
+    "Idris Wibowo",
+    "Matthew Gombolay"
+  ],
+  "problem": "Robot training curricula require choices about which interventions to present and when, while the student's learning state changes throughout training.",
+  "contribution": "A teacher-student loop in which a Q-learning teacher uses UCB exploration to select intervention transitions from validation learning-progress rewards produced by PPO student training.",
+  "pipeline": [
+    "Observe the current curriculum and student learning state.",
+    "Select an intervention transition with a Q-table and UCB exploration.",
+    "Train and validate the PPO student.",
+    "Update the teacher from validation learning-progress rewards."
+  ],
+  "evidence": [
+    "Architecture figure and Q-table evolution animation.",
+    "Benchmark and validation visualizations under paper_visualizations/.",
+    "Runnable teacher-student and baseline entry points."
+  ],
+  "limitations": "No public project paper or hosted demo is currently approved for publication on this site.",
+  "image": {
+    "src": "/images/causal/stacking-movement.png",
+    "alt": "Robot manipulation environment used for AutoCaLC curriculum-learning experiments"
+  },
+  "actions": [
+    {
+      "label": "View repository",
+      "url": "https://github.com/kpatherya/autocalc",
+      "type": "repository"
+    },
+    {
+      "label": "Read project article",
+      "url": "/2025/12/15/autocalc-curriculum-learning/index.html",
+      "type": "article"
+    }
+  ]
+}

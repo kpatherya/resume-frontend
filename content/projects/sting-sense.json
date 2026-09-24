@@ -1,0 +1,51 @@
+{
+  "slug": "sting-sense",
+  "tier": "featured",
+  "status": "Research prototype",
+  "title": "Sting-Sense",
+  "eyebrow": "Transportation sensing",
+  "headline": "Bus telemetry for route and congestion analysis",
+  "summary": "Sting-Sense turns bus GPS and IMU data into route-level views of road quality and congestion. Its Streamlit and Folium workflow connects collected route data, traffic categorization, and interactive maps for transit-focused analysis.",
+  "collaborators": [
+    "Yu Wang",
+    "Drumil Deliwala",
+    "Ashutosh Dhekne",
+    "Francisco Romero"
+  ],
+  "problem": "Transit telemetry is distributed across location and inertial streams, making route-level road quality and congestion patterns difficult to inspect together.",
+  "contribution": "An application-oriented analytics workflow that combines collected GPS and IMU route data with traffic scoring, time filtering, and interactive map views.",
+  "pipeline": [
+    "Load collected route and sensor CSV data.",
+    "Filter observations by route and time window.",
+    "Categorize traffic and route-level sensing signals.",
+    "Present results through Streamlit and Folium maps."
+  ],
+  "evidence": [
+    "Collected route CSV files under real_data/.",
+    "A generated interactive map artifact.",
+    "Runnable Streamlit and map application entry points.",
+    "The Flash-Fusion v1 preprint extends this sensor-driven transportation analysis into a natural-language IoT workflow."
+  ],
+  "limitations": "The root documentation is currently minimal. The linked preprint reflects the Sting-Sense-centered v1 system; a v2 aligned with the current Flash-Fusion submission is planned.",
+  "image": {
+    "src": "/images/mci/stinger-run-img.png",
+    "alt": "Transit route visualization produced from Sting-Sense bus telemetry"
+  },
+  "actions": [
+    {
+      "label": "View repository",
+      "url": "https://github.com/kpatherya/sting-sense",
+      "type": "repository"
+    },
+    {
+      "label": "Live demo",
+      "url": "https://sting-sense.vercel.app/",
+      "type": "demo"
+    },
+    {
+      "label": "Read project article",
+      "url": "/2024/12/13/mci-bus-analytics/index.html",
+      "type": "article"
+    }
+  ]
+}

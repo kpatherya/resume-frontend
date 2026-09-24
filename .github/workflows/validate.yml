@@ -1,0 +1,47 @@
+name: Validate content
+
+on:
+  push:
+    branches:
+      - 'kausar/**'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Build and validate the project manifest
+        run: python3 tools/build_manifest.py --check
+
+      - name: Check revision branch scope
+        # A kausar/<slug> branch must only touch that project's source file, so
+        # the seven revisions can merge into main in any order without conflict.
+        run: |
+          branch="${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}"
+          case "$branch" in
+            kausar/*) slug="${branch#kausar/}" ;;
+            *) echo "Not a revision branch; skipping scope check."; exit 0 ;;
+          esac
+
+          git fetch --quiet origin main
+          changed=$(git diff --name-only origin/main...HEAD)
+          [ -n "$changed" ] || { echo "No changes against main."; exit 0; }
+
+          echo "Changed files:"; echo "$changed" | sed 's/^/  /'
+
+          strays=$(echo "$changed" | grep '^content/projects/' | grep -v "^content/projects/$slug.json$" || true)
+          if [ -n "$strays" ]; then
+            echo "::error::Branch $branch edits another project's source:"
+            echo "$strays" | sed 's/^/  /'
+            exit 1
+          fi

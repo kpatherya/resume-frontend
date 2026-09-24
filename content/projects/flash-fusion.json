@@ -1,0 +1,48 @@
+{
+  "slug": "flash-fusion",
+  "tier": "featured",
+  "status": "Active research",
+  "title": "Flash-Fusion",
+  "eyebrow": "Reliable AI systems",
+  "headline": "Structured natural-language analysis for IoT sensor streams",
+  "summary": "Flash-Fusion turns natural-language requests over sensor data into typed plans, validates them against schemas, and executes deterministic operators. Its benchmark artifacts, inspection traces, and reusable query pipeline support paper-oriented research on low-latency, auditable sensor analysis.",
+  "collaborators": [
+    "Ashutosh Dhekne",
+    "Francisco Romero"
+  ],
+  "problem": "Natural-language analysis over IoT streams must translate open-ended requests into bounded data operations without losing reproducibility or inspection context.",
+  "contribution": "A reusable route, plan, validate, execute, and inspect pipeline with typed schemas, deterministic pandas operators, and an optional skeleton-cache path.",
+  "pipeline": [
+    "Route the request into a supported analysis path.",
+    "Create a closed-vocabulary typed plan.",
+    "Validate the plan against data and operation schemas.",
+    "Execute deterministic operators and retain an inspection trace."
+  ],
+  "evidence": [
+    "Benchmark driver and output conventions in run_benchmark.sh.",
+    "Committed benchmark artifacts under results/.",
+    "Public preprint and hosted research demo."
+  ],
+  "limitations": "This is active research. The public demo and committed benchmark artifacts reflect the current prototype and may change as evaluation continues.",
+  "image": {
+    "src": "/assets/flash/flash-canva-gen.gif",
+    "alt": "Flash-Fusion architecture showing the sensor query planning and execution workflow"
+  },
+  "actions": [
+    {
+      "label": "View repository",
+      "url": "https://github.com/kpatherya/flash-fusion",
+      "type": "repository"
+    },
+    {
+      "label": "Live demo",
+      "url": "https://flash-fusion.vercel.app/",
+      "type": "demo"
+    },
+    {
+      "label": "Read preprint",
+      "url": "https://arxiv.org/abs/2511.11885",
+      "type": "paper"
+    }
+  ]
+}
