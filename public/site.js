@@ -11,7 +11,7 @@ function createAction(action, projectTitle, className = "action-link") {
   const link = createElement("a", className, action.label);
   link.href = action.url;
 
-  if (!action.url.startsWith("#")) {
+  if (!action.url.startsWith("#") && !action.url.startsWith("mailto:")) {
     link.target = "_blank";
     link.rel = "noopener noreferrer";
     link.setAttribute("aria-label", `${action.label} for ${projectTitle} (opens in a new tab)`);
@@ -21,19 +21,17 @@ function createAction(action, projectTitle, className = "action-link") {
 }
 
 function renderHero(site) {
-  document.querySelector("#hero-heading").textContent = site.headline;
-  document.querySelector("#hero-bio").textContent = site.bio;
+  document.querySelector("#hero-heading").textContent = `${site.headline} ${site.bio}`;
 
   document.querySelector("#hero-actions").append(
     createAction(site.primaryAction, site.name, "profile-link"),
-    createAction(site.secondaryAction, site.name, "profile-link"),
   );
 
-  const profileActions = document.querySelector("#profile-actions");
+  const heroActionUrls = new Set([site.primaryAction.url]);
   site.profileActions.forEach((action) => {
-    const heroLink = createAction(action, site.name, "profile-link");
-    document.querySelector("#hero-actions").append(heroLink);
-    profileActions.prepend(createAction(action, site.name));
+    if (!heroActionUrls.has(action.url)) {
+      document.querySelector("#hero-actions").append(createAction(action, site.name, "profile-link"));
+    }
   });
 }
 

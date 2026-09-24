@@ -1,17 +1,33 @@
 {
   "site": {
     "name": "Kausar Patherya",
-    "headline": "I build AI agents you can trust with messy sensor data \u2014 from the device to the cloud.",
-    "bio": "I'm a CS PhD student at Georgia Tech's LLAMAS Lab, working on how people can ask plain-language questions of data that was never meant to be queried that way. My current system, Flash-Fusion, compiles those questions into typed, validated plans and runs them over live IoT streams \u2014 95% faster and 98% cheaper than handing raw telemetry to an LLM, deployed on a university bus fleet. Before that I wrote the embedded firmware that made the same fleet's data small enough to ship over LTE, which is roughly how I think about this work: the hard problems live between the sensor and the model, not inside either one. Most of it ends up on GitHub \u2014 if something's useful, open an issue.",
+    "headline": "I want intelligent agents, biological and artificial, that navigate efficiently across modalities to achieve their goals",
+    "bio": "... you can't always get what you want. But if you try sometime, you might get what you need. In my case, that's a CS PhD at Georgia Tech, where I build interactive AI systems that are useful, reliable, and inexpensive. See what I did there? \uD83D\uDE09 My writings come straight from the heart (and mind), and I want to take you along on my journey. Any project code I release prioritizes reusability and extensibility. If you find my code and writing useful, we should talk. I'd love to learn from you.",
     "primaryAction": {
-      "label": "CV (Sep. 2026)",
+      "label": "CV",
       "url": "https://kausarpatherya.com/static/Kausar-Patherya-Resume.pdf"
     },
-    "secondaryAction": {
-      "label": "Read the Flash-Fusion preprint",
-      "url": "https://arxiv.org/abs/2511.11885"
-    },
     "profileActions": [
+      {
+        "label": "Email",
+        "url": "mailto:kpatherya3@gatech.edu"
+      },
+      {
+        "label": "CV",
+        "url": "https://kausarpatherya.com/static/Kausar-Patherya-Resume.pdf"
+      },
+      {
+        "label": "Bio",
+        "url": "/static/bio.txt"
+      },
+      {
+        "label": "Scholar",
+        "url": "https://scholar.google.com/citations?hl=en&user=oW5xkPQAAAAJ"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/kpatherya/"
+      },
       {
         "label": "GitHub",
         "url": "https://github.com/kpatherya"
@@ -20,16 +36,16 @@
   },
   "researchThemes": [
     {
-      "title": "Reliable AI Workflows",
-      "description": "Typed plans, schema validation, and per-query evidence traces, so you can audit what an agent actually did instead of taking its word for it."
+      "title": "Query Plan Optimization",
+      "description": "Dynamically-generated AI workflows should work correctly, quickly, and cheaply."
     },
     {
-      "title": "Multimodal Perception and Fusion",
-      "description": "Combining language, vision, depth, GPS, and inertial signals to read environments that change faster than any single sensor can follow."
+      "title": "Multimodal Awareness",
+      "description": "Beyond text, vision and audio contribute to useful world models."
     },
     {
-      "title": "AI in Real-World Systems",
-      "description": "Prototypes that leave the bench \u2014 bus fleets, robots, workstations \u2014 where success means a system that keeps running, not a better number in a table."
+      "title": "Real-World Systems",
+      "description": "The work does not end with a publication. It lives on through live prototypes."
     }
   ],
   "projects": [

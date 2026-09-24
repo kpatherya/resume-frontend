@@ -14,7 +14,7 @@ source_scope:
     - TokenSmith
   note: "Flash-Fusion link inventory was filtered to portfolio-facing files per user instruction."
 
-brand_message: "I build AI systems that turn multi-modal data into intelligent, reliable workflows."
+brand_message: "I want intelligent agents, biological and artificial, that navigate efficiently across modalities to achieve their goals."
 
 projects:
   - slug: flash-fusion
