@@ -33,17 +33,17 @@
   },
   "actions": [
     {
-      "label": "View repository",
+      "label": "code",
       "url": "https://github.com/kpatherya/sting-sense",
       "type": "repository"
     },
     {
-      "label": "Live demo",
+      "label": "demo",
       "url": "https://sting-sense.vercel.app/",
       "type": "demo"
     },
     {
-      "label": "Read project article",
+      "label": "blog",
       "url": "/2024/12/13/mci-bus-analytics/index.html",
       "type": "article"
     }

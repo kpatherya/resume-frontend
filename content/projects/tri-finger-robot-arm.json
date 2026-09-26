@@ -32,12 +32,12 @@
   },
   "actions": [
     {
-      "label": "View repository",
+      "label": "code",
       "url": "https://github.com/kpatherya/rl-kuka-arm",
       "type": "repository"
     },
     {
-      "label": "Read project article",
+      "label": "blog",
       "url": "/2024/12/08/robot-arm-advml/index.html",
       "type": "article"
     }

@@ -31,12 +31,12 @@
   },
   "actions": [
     {
-      "label": "View repository",
+      "label": "code",
       "url": "https://github.com/kpatherya/polaris",
       "type": "repository"
     },
     {
-      "label": "Read project article",
+      "label": "blog",
       "url": "/2025/12/05/polaris-cross-season-landmarks/index.html",
       "type": "article"
     }

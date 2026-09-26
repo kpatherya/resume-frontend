@@ -32,12 +32,12 @@
   },
   "actions": [
     {
-      "label": "View repository",
+      "label": "code",
       "url": "https://github.com/kpatherya/autocalc",
       "type": "repository"
     },
     {
-      "label": "Read project article",
+      "label": "blog",
       "url": "/2025/12/15/autocalc-curriculum-learning/index.html",
       "type": "article"
     }

@@ -30,19 +30,24 @@
   },
   "actions": [
     {
-      "label": "View repository",
+      "label": "arXiV",
+      "url": "https://arxiv.org/abs/2511.11885",
+      "type": "paper"
+    },
+    {
+      "label": "code",
       "url": "https://github.com/kpatherya/flash-fusion",
       "type": "repository"
     },
     {
-      "label": "Live demo",
+      "label": "demo",
       "url": "https://flash-fusion.vercel.app/",
       "type": "demo"
     },
     {
-      "label": "Read preprint",
-      "url": "https://arxiv.org/abs/2511.11885",
-      "type": "paper"
+      "label": "blog",
+      "url": "#",
+      "type": "article"
     }
   ]
 }

@@ -33,17 +33,17 @@
   },
   "actions": [
     {
-      "label": "View repository",
+      "label": "code",
       "url": "https://github.com/kpatherya/situp",
       "type": "repository"
     },
     {
-      "label": "Watch project video",
+      "label": "demo",
       "url": "https://www.youtube.com/embed/W3mUOfoK-hg?si=PbCySZheUHO1ZvdU&start=3",
       "type": "video"
     },
     {
-      "label": "Read project article",
+      "label": "blog",
       "url": "/2024/12/09/situp-posture-hri/index.html",
       "type": "article"
     }

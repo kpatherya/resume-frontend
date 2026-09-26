@@ -1,4 +1,5 @@
 const MANIFEST_URL = "/data/project-manifest.json";
+const HIGHLIGHT_ACTION_LABELS = ["project page", "arXiV", "code", "demo", "blog"];
 
 function createElement(tagName, className, text) {
   const element = document.createElement(tagName);
@@ -48,8 +49,14 @@ function renderThemes(themes) {
   });
 }
 
+function hasHighlightActions(project) {
+  const labels = new Set(["project page", ...project.actions.map((action) => action.label)]);
+  return HIGHLIGHT_ACTION_LABELS.every((label) => labels.has(label));
+}
+
 function renderProjectCard(project) {
-  const article = createElement("article", `project-card project-card-${project.tier}`);
+  const highlightedClass = hasHighlightActions(project) ? " project-card-highlighted" : "";
+  const article = createElement("article", `project-card project-card-${project.tier}${highlightedClass}`);
   const projectUrl = `/projects/${project.slug}/index.html`;
   const mediaLink = createElement("a", "project-media");
   mediaLink.href = projectUrl;
@@ -85,7 +92,7 @@ function renderProjectCard(project) {
   );
 
   const actions = createElement("div", "project-actions");
-  actions.append(createAction({ label: "View project", url: projectUrl }, project.title, "action-link action-link-primary"));
+  actions.append(createAction({ label: "project page", url: projectUrl }, project.title, "action-link action-link-primary"));
   project.actions.forEach((action) => actions.append(createAction(action, project.title)));
   body.append(actions);
   article.append(mediaLink, body);

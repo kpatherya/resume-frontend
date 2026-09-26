@@ -34,12 +34,12 @@
   },
   "actions": [
     {
-      "label": "View repository",
+      "label": "code",
       "url": "https://github.com/kpatherya/quad-ugv-mapping",
       "type": "repository"
     },
     {
-      "label": "Read architecture docs",
+      "label": "blog",
       "url": "https://github.com/kpatherya/quad-ugv-mapping/blob/main/docs/ARCHITECTURE.md",
       "type": "documentation"
     }
