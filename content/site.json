@@ -2,7 +2,7 @@
   "site": {
     "name": "Kausar Patherya",
     "headline": "I want intelligent agents, biological and artificial, that navigate efficiently across modalities to achieve their goals",
-    "bio": "... you can't always get what you want. But if you try sometime, you might get what you need. In my case, that's a CS PhD at Georgia Tech, where I build interactive AI systems that are useful, reliable, and inexpensive. See what I did there? 😉 My writings come straight from the heart (and mind), and I want to take you along on my journey. Any project code I release prioritizes reusability and extensibility. If you find my code and writing useful, we should talk. I'd love to learn from you.",
+    "bio": "... but you can't always get what you want. If you try sometime, you might get what you need. In my case, that's a CS PhD at Georgia Tech, where I build interactive AI systems that are useful, reliable, and inexpensive. See what I did there? 😉 My writings come straight from the heart (and mind), and I want to take you along on my journey. Any project code I release prioritizes reusability and extensibility. If you find my code and writing useful, we should talk. I'd love to learn from you.",
     "primaryAction": {
       "label": "CV",
       "url": "https://kausarpatherya.com/static/Kausar-Patherya-Resume.pdf"
@@ -49,8 +49,8 @@
     }
   ],
   "projectOrder": [
-    "flash-fusion",
     "polaris",
+    "flash-fusion",
     "sting-sense",
     "situp",
     "autocalc",
