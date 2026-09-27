@@ -1,3 +1,1 @@
-Does anyone look at this?
-
-Email me at kausarpatheryaa@gmail.com with "yes they do, dummy" in the subject line, and click send.
+Kausar Patherya is a Computer Science PhD researcher based in Atlanta. He is a student in the Georgia Tech Database Group, advised by Francisco Romero. He works at the intersection of AI and systems, building query-planning infrastructure for interactive, multimodal AI agents. He received his Masters in Computer Science from the Georgia Institute of Technology in 2026, and his Bachelors in Industrial Engineering from the University of Illinois at Urbana-Champaign in 2022.
